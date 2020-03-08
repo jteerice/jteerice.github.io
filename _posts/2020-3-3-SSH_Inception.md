@@ -6,11 +6,11 @@ title: SSH_Inception
 ## Login
 On EDURange after scenario is provisioned, use the Login and Password in the Scenario Information section and the Public IP Address of the first instance, nat, to begin the challenge.
 
-```bash
+```console
 $ ssh zheller@3.92.162.111 # enter 2fff0a89
 ```
 ## nat
-```bash
+```console
 Welcome to SSH Inception. The goal is to answer all questions by exploring the local network, the subnet 10.0.0.0/27. You are currently at the NAT Instance.
 Your journey will begin when you login into the next host:     
     ssh 10.0.0.5
@@ -24,7 +24,7 @@ Helpful commands: ssh, help, man
 zheller@nat:~$ ssh 10.0.0.5 # enter 2fff0a89
 ```
 ## starting_line
-```bash
+```console
 "It's a week the first level down. Six months the second level down, and... the third level..."
 
 Go a level deeper. You will find the next host at 10.0.0.7.
@@ -35,7 +35,7 @@ zheller@starting-line:~$ cat secret
 zheller@starting-line:~$ ssh 10.0.0.7 -p 123 # enter 2fff0a89
 ```
 ## first_stop
-```bash
+```console
 "I'll tell you a riddle. You're waiting for a train, a train that will take you far away. You know where you hope this train will take you, but you don't know for sure."
 
 You found it. Well done. The next dream machine lies just a few addresses higher on your subnet. Use nmap to find the next closest machine.  The subnet address was mentioned in an earlier message, or you can calculate it for yourself using 'ipcalc'
@@ -45,7 +45,7 @@ zheller@first-stop:~$ cat secret
 ba94516a
 ```
 ### Enumeration
-```bash
+```console
 zheller@first-stop:~$ nmap 10.0.0.0/24
 ```
 Refined Output:
@@ -64,11 +64,11 @@ Refined Output:
 
 10.0.0.19:666 - doom
 
-```bash
+```console
 zheller@first-stop:~$ ssh 10.0.0.10 # enter 2fff0a89
 ```
 ## second_stop
-```bash
+```console
 "Remember, you are the dreamer, you build this world."
 
 SSH a level deeper if you dare. This time no password is provided. However, you might find the file id_rsa helpful...
@@ -77,7 +77,7 @@ zheller@second-stop:~$ cat secret
 zheller@second-stop:~$ ssh -i id_rsa 10.0.0.13
 ```
 ## third_stop
-```bash
+```console
 "Do not try and bend the spoon. That's impossible. Instead... only try to realize the truth."
 
 Someone incepted the password for the next stop in one of these directories.
@@ -91,11 +91,11 @@ zheller@third-stop:~$ find ./ | grep -r pass
 dir52/file.txt:to login as zheller at the ip address 10.0.0.16 use the password d63881f1
 ```
 Since IP is blocked, I close out this SSH session in 10.0.0.13 and am able to ssh into 10.0.0.16 from 10.0.0.10.
-```bash
+```console
 zheller@second-stop:~$ ssh 10.0.0.16 # enter d63881f1
 ```
 ## fourth_stop
-```bash
+```console
 "It's been six hours. Dreams move one... one-hundredth the speed of reality, and dog time is one-seventh human time. So y'know, every day here is like a minute. It's like Inception, Morty, so if it's confusing and stupid, then so is everyone's favorite movie."
 
 There is an ftp server on the network. Find some useful credentials there to run decryptpass to get your next password. If you can make nmap more aggressive it may be easier to learn how to log in to the ftp server.
@@ -110,7 +110,7 @@ zheller@fourth-stop:~$ cat secret
 ```
 We know 10.0.0.14 has port 21 exposed with an ftp service running.
 
-```bash
+```console
 zheller@fourth-stop:~$ ftp 10.0.0.14
 Connected to 10.0.0.14.
 220 (vsFTPd 3.0.3)
@@ -120,7 +120,7 @@ Login failed.
 ```
 Reading about [anonymous FTP](https://www.webopedia.com/TERM/A/anonymous_FTP.html), I learned that you can use the username *anonymous* or *ftp* when prompted for username and use anything as your password.
 
-```bash
+```console
 zheller@fourth-stop:~$ ftp 10.0.0.14
 Connected to 10.0.0.14.
 220 (vsFTPd 3.0.3)
@@ -149,6 +149,7 @@ enter aes-256-cbc decryption password:
 zheller@fourth-stop:~$ ssh 10.0.0.17 # enter 6230d3e4
 ```
 ## fifth_stop
+```console
 "The ecstasy that blooms in synapses is Paprika-brand milk fat! 5% is the norm. The safety net of the ocean is nonlinear, even with what crabs dream of! Lets go!"
 
 Decode the file 'betcha_cant_read_me' to find your way to the ultimate challenge... SATAN'S PALACE
@@ -160,7 +161,9 @@ You found me. Good job. The next challenge will not be so easy. You will find Sa
 zheller@fifth-stop:~$ ssh 10.0.0.19 -p 666 ls # enter c8da368f
 zheller@10.0.0.19's password:
 secret
+```
 ## satans_palace
+```console
 zheller@fifth-stop:~$ ssh 10.0.0.19 -p 666 cat secret
 zheller@10.0.0.19's password:
 Permission denied, please try again.
