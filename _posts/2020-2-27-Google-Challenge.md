@@ -4,8 +4,8 @@ title: A Challenge from BSidesSF2020
 ---
 ## Google Security & Privacy Engineering Challenge
 I stopped by the Google booth at BSidesSF 2020 this weekend, and I picked up a challenge card and a free Titan Security Key Bundle (which I greatly appreciated). Today, I sorted through all the papers, stickers, and t-shirts that I recieved at BSides and RSA, and I rediscovered this card today and solved the challenge. I did censor my answer here though ;)
+
 ![Challenge Card]( {{ site.baseurl }}/images/bsidesSF2020/google_chall.png)
-![Test]({{site.baseurl}}/assets/bkg.png)
 
 ``` python
 #!/usr/bin/python3
