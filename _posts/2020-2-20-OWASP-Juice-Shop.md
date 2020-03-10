@@ -7,7 +7,8 @@ title: OWASP Juice Shop - 1 Star Solutions
 ### Access a confidential document.
 Navigate to About Us page, where there is a link to terms of use on FTP server: http://10.10.50.111/ftp/legal.md?md_debug=true.
 
-Go to http://10.10.50.111/ftp/
+Go to ```http://10.10.50.111/ftp/```.
+
 ![ftp site](/images/juice/ftp.png)
 
 Download acquisitions.md
@@ -51,7 +52,7 @@ See: [urlencode](https://www.w3schools.com/tags/ref_urlencode.ASP)
 ## Outdated Whitelist
 ### Let us redirect you to one of our crypto currency addresses which are not promoted any longer.
 
-In "Your Basket" during checkout, we see the Other payment options for donations. Since bitcoins are most likely for donations, we inspect the donation and merchandise options still available. Several of them use the format: ```localhost:3000/redirect?to=<site>```.
+In "Your Basket" during checkout, we see the "Other payment options" for donations. Since bitcoins are most likely for donations, we inspect the donation and merchandise options still available. Several of them use the format: ```localhost:3000/redirect?to=<site>```.
 
 Searching through the HTML there doesn't appear to be any buttons commented out. However, in main-es2015.js, there are several redirects (thanks Ctrl-F) which we can view at ```http://localhost:3000/main-es2015.js```. I first searched for bitcoin which had a lot of results; then I checked "redirect?to" in the file.
 
