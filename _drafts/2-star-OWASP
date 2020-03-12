@@ -1,0 +1,103 @@
+---
+layout: post
+title: OWASP Juice Shop 9.3.1 - 2 Star Solutions
+---
+
+## Admin Section
+### Access the administration section of the store.
+Navigate to http://10.10.50.111/#/administration
+Admin can see list of registered users, non-logged in cannot.
+#### Emails
+|email|
+|---|
+|admin@juice-sh.op
+|jim@juice-sh.op
+|bender@juice-sh.op
+|bjoern.kimminich@googlemail.com
+|ciso@juice-sh.op
+|support@juice-sh.op
+|morty@juice-sh.op
+|mc.safesearch@juice-sh.op
+|J12934@juice-sh.op
+|wurstbrot@juice-sh.op
+|amy@juice-sh.op
+|bjoern@juice-sh.op
+|bjoern.kimminich@owasp.org
+
+#### Recycling Requests
+|User|Quantity|Address|Pickup Date|
+|---|---|---|---|
+|2|800|Starfleet HQ, 24-593 Federation Drive, San Francisco, CA |2270-01-17T00:00:00.000Z
+
+## Classic Stored XSS
+### Perform an XSS attack with ```<script>alert(`xss`)</script>``` on a legacy page within the application.
+
+In the Architecture overview, we are told Angular is used to create a so-called *Single Page Application*. But, the profile page looks subtly odd and dated compared with the other screens. You can update an account's username with a field, which is susceptible to XSS.
+
+Entering ```<script>alert(`xss`)</script>```, our username gets set to ```\lert(`xss`)```. There is a custom RegEx sanitation behind the scenes. Through lots of incremental changes, we eventually arrive at an input which passes the sanitation: ```<<script><sscript>alert(`xss`)</script>```.
+
+![XSS stored in username](/images/juice/profile_xss.png)
+
+## Deprecated Interface
+### Use a deprecated B2B interface that was not properly shut down.
+
+## Five-Star Feedback
+### Get rid of all 5-star customer feedback.
+
+### Login Admin
+#### Log in with the administrator's user account.
+Use SQL Injection ```' OR 1=1;--``` in email field, and any password.
+
+![inject](/images/juice/sql_injection.png)
+
+## Login MC SafeSearch
+### Log in with MC SafeSearch's original user credentials without applying SQL Injection or any other bypass.
+Googling MC SafeSearch we find this College Humor [video](https://www.youtube.com/watch?v=v59CX2DiX0Y).
+
+In the song, MC SafeSearch says his password is the name of his dog Mr. Noodles, but was tricky and replaced some of the vowels with zeroes.
+
+Email: mc.safesearch@juice-sh.op
+Password: Mr. N00dles
+
+## Password Strength
+### Log in with the administrator's user credentials without previously changing them or applying SQL Injection.
+After the Login Admin challenge, we can see in a few places that the admin's email is admin@juice-sh.op
+
+## Security Policy
+### Behave like any "white-hat" should before getting into the action.
+
+[security.txt](https://securitytxt.org/) is a proposed standard which allows websites to define security policies. The file is recommended to be placed inside the .well-known directory.
+
+```shell
+$ curl localhost:3000/.well-known/security.txt
+Contact: mailto:donotreply@owasp-juice.shop
+Encryption: https://keybase.io/bkimminich/pgp_keys.asc?fingerprint=19c01cb7157e4645e9e2c863062a85a8cbfbdcda
+Acknowledgements: /#/score-board
+```
+
+## View Basket
+### View another user's shopping basket.
+Using FoxyProxy and Burp Suite, intercept a packet of a logged in user going to their basket. We use admin here, and from the administration page we know admin has ```1``` as their user id. We can see in the following request, that baskets are stored by user id (e.g. ```GET /rest/basket/1```).
+```HTTP
+GET /rest/basket/1 HTTP/1.1
+Host: localhost:3000
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0
+Accept: application/json, text/plain, */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGF0dXMiOiJzdWNjZXNzIiwiZGF0YSI6eyJpZCI6MSwidXNlcm5hbWUiOiIiLCJlbWFpbCI6ImFkbWluQGp1aWNlLXNoLm9wIiwicGFzc3dvcmQiOiIwMTkyMDIzYTdiYmQ3MzI1MDUxNmYwNjlkZjE4YjUwMCIsInJvbGUiOiJhZG1pbiIsImxhc3RMb2dpbklwIjoiMC4wLjAuMCIsInByb2ZpbGVJbWFnZSI6ImRlZmF1bHQuc3ZnIiwidG90cFNlY3JldCI6IiIsImlzQWN0aXZlIjp0cnVlLCJjcmVhdGVkQXQiOiIyMDIwLTAzLTExIDAwOjUxOjE0LjM4OSArMDA6MDAiLCJ1cGRhdGVkQXQiOiIyMDIwLTAzLTExIDAwOjUxOjE0LjM4OSArMDA6MDAiLCJkZWxldGVkQXQiOm51bGx9LCJpYXQiOjE1ODM4OTY0NzYsImV4cCI6MTU4MzkxNDQ3Nn0.U--ZH-AwBaigQeJRIL08JFTpWKN__InJB25NBjGvMreIz-U4kjvtBbrPW9lZHR5eM21k3_UJD8VvA0-5detIoDD8-eDOqBqtVoTThexDOYEE5GBOmemIh4GFQSjrbD-O6dzJwubmF85iw9COLjAu3UmCPOi_v5fwZt85Wo5Og4A
+DNT: 1
+Connection: close
+Referer: http://localhost:3000/
+Cookie: io=JAxjrx9sxN2PvPa7AAAE; language=en; welcomebanner_status=dismiss; cookieconsent_status=dismiss; continueCode=bKZ8yYJg36bORLxl5zMNanDAo9TjiyOUzYH18GPXj2mErq7VeQpokW9v14Bw; token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdGF0dXMiOiJzdWNjZXNzIiwiZGF0YSI6eyJpZCI6MSwidXNlcm5hbWUiOiIiLCJlbWFpbCI6ImFkbWluQGp1aWNlLXNoLm9wIiwicGFzc3dvcmQiOiIwMTkyMDIzYTdiYmQ3MzI1MDUxNmYwNjlkZjE4YjUwMCIsInJvbGUiOiJhZG1pbiIsImxhc3RMb2dpbklwIjoiMC4wLjAuMCIsInByb2ZpbGVJbWFnZSI6ImRlZmF1bHQuc3ZnIiwidG90cFNlY3JldCI6IiIsImlzQWN0aXZlIjp0cnVlLCJjcmVhdGVkQXQiOiIyMDIwLTAzLTExIDAwOjUxOjE0LjM4OSArMDA6MDAiLCJ1cGRhdGVkQXQiOiIyMDIwLTAzLTExIDAwOjUxOjE0LjM4OSArMDA6MDAiLCJkZWxldGVkQXQiOm51bGx9LCJpYXQiOjE1ODM4OTY0NzYsImV4cCI6MTU4MzkxNDQ3Nn0.U--ZH-AwBaigQeJRIL08JFTpWKN__InJB25NBjGvMreIz-U4kjvtBbrPW9lZHR5eM21k3_UJD8VvA0-5detIoDD8-eDOqBqtVoTThexDOYEE5GBOmemIh4GFQSjrbD-O6dzJwubmF85iw9COLjAu3UmCPOi_v5fwZt85Wo5Og4A
+If-None-Match: W/"51e-g+L4GWuN4lWam4EZuNC1rOU8MLg"
+```
+To solve this challenge, simply alter ```1``` to be any other valid user id. If you are still capturing, you'll get your receipt.
+```HTTP
+42["challenge solved",{"key":"basketAccessChallenge","name":"View Basket","challenge":"View Basket (View another user's shopping basket.)","flag":"e6982b34b6734ceadd28e5019b251f929a80b815","hidden":false}]
+```
+
+## Weird Crypto
+### Inform the shop about an algorithm or library it should definitely not use the way it does.
+
+Mention MD5 in the comment of Customer Feedback, and the challenge is solved.

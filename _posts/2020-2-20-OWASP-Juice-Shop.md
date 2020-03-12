@@ -1,6 +1,6 @@
 ---
 layout: post
-title: OWASP Juice Shop - 1 Star Solutions
+title: OWASP Juice Shop 9.3.1 - 1 Star Solutions
 ---
 
 ## Confidential Document
