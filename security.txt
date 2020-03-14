@@ -7,4 +7,4 @@ permalink: /.well-known/security.txt
 Contact: mailto:forward_my_packets@protonmail.com
 Preferred-Languages: en, es
 Canonical: zacheller.github.io/.well-known/security.txt
-flag{h3ll0_STL_0W4SP_H0WR3_U?}
+# Flag: flag{h3ll0_STL_0W4SP_H0WR3_U?}
