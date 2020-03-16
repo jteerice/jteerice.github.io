@@ -6,7 +6,7 @@ permalink: /about/
 ### Background
 * B.S./M.S. in Computer Science with cyber security focus
 * Head of Cyber Security Curriculum Development at The Coding School
-* Researcher on [fuzzing embedded system binaries](https://github.com/BryanOrabutt/almiraj) 
+* Researcher on [fuzzing embedded system binaries](/almiraj)
 * Founding member of [b34r$hell](https://wustl-bearshell.github.io/) CTF Team
   * 1st place at STLCyberCon CTF
   * 3rd place at STL Converge Tour CTF
