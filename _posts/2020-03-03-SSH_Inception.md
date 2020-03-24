@@ -1,6 +1,6 @@
 ---
 layout: post
-title: SSH_Inception
+title: EDURange - SSH_Inception
 ---
 
 ## Login

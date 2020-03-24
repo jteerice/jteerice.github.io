@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Hack The Box - Easy Phish
+title: HackTheBox - Easy Phish
 ---
 
 > Customers of secure-startup.com have been recieving some very convincing phishing emails, can you figure out why?

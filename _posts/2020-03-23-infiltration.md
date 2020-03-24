@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Hack The Box - Infiltration
+title: HackTheBox - Infiltration
 ---
 
 > Can you find something to help you break into the company 'Evil Corp LLC'. Recon social media sites to see if you can find any useful information.
