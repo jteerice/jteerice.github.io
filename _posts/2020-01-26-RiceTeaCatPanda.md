@@ -1,6 +1,6 @@
 ---
 layout: post
-title: RiceTeaCatPanda CTF Solutions
+title: CTF - RiceTeaCatPanda
 ---
 CTF location: riceteacatpanda.wtf
 ## Cryptography
