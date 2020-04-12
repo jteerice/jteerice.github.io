@@ -1,0 +1,20 @@
+
+
+
+I used a RHEL micro instance on AWS for a couple years while in undergrad. I mainly used it for learning Linux and full stack web app development. I also setup a PHP and SQL backend for a massage appointment scheduler iOS app to handle the Stripe payments and manage the appointments, and I set up SMTP to forward confirmation emails through a gmail account. In the testing process, I got that gmail address marked as a spam bot which meant later I could not use it to open a Twitter account for a bot, but I digress. I still wanted to host some web apps and tinker, but was wary of the cost of automatic scaling. My load was generally not very high, but so I was excited when I heard about Oracle Cloud's Always Free Tier. I could get two micro instances for free forever with no usage limits and could even get a load balancer between them. Here are the specs from the [OCI Documentation](https://docs.cloud.oracle.com/en-us/iaas/Content/FreeTier/resourceref.htm):
+> Shape: VM.Standard.E2.1.Micro
+> Processor: 1/8th of an OCPU with the ability to use additional CPU resources
+> Memory: 1 GB
+> Networking: Includes one VNIC with one public IP address and up to 480 Mbps network bandwidth
+> Operating System: Your choice of one of the following Always Free-eligible operating systems:
+> * Oracle Linux (including Oracle Autonomous Linux)
+> * Canonical Ubuntu Linux
+> * CentOS Linux
+
+Setting up a basic OCI instance was a little confusing the first time since the setting a public IP was , so I figured I'd write a guide for anyone that has similar needs and is interested (future self included).
+
+After jumping through the signup hoops, click on the hamburger menu to Compute>Instances.
+
+![pic](/images/oci/1.png)
+
+Then

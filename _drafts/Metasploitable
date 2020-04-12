@@ -1,0 +1,71 @@
+---
+layout: post
+title: EDURange - Metasploitable
+---
+## Description
+
+Metasploitable poses the challenge of identifying a vulnerable server, enumerating the services and ports, and using the Metasploit Framework to gain access to the server. Finally, you will locate and exfiltrated capture the flag target cards and provide the hashes of the image files for scoring.
+
+## Background
+
+Identifying servers on your network and determining their vulnerabilities is an important skill for penetration testers and system administrators. Using tools, like nmap and the Metasploit Framework, you can learn about the threats to your servers.
+
+The nmap tool, or network mapper, is a comprehensive, free, open source network scanning tool. It is used by penetration testers, network administrators, and hackers to examine a server. It can be used on a single host or a network segment/ip range. Nmap manipulates TCP flags to elicit information. By analyzing TCP and UDP probes and comparing them against fingerprints of defined responses nmap can:
+
+* Detect/discover live hosts on a network (server/host discovery),
+* Identify active UDP and TCP ports (port enumeration)
+* Identify software version information for open ports (service discovery)
+* Identify operating system information;
+* Detect potential vulnerabilities and security holes.
+
+The Metasploit Framework is a part of Kali Linux or can be installed separately on Windows or Linux/UNIX operating systems. It provides a platform that can be used for penetration testing. Metasploit can help to identify, validate, and exploit known vulnerabilities in operating systems, applications, and hardware. It can also be used to develop new exploits.
+
+Three key components are:
+
+* **Exploits** – the method of exploiting a vulnerability in an asset. MSF currently has > 1,900 exploits.
+
+* **Payloads** – the code that can be run on a target that has been compromised. MSF currently has > 550 payloads.
+
+* **Auxiliary modules** – the programs that can perform fuzzing, scanning, and sniffing. MSF currently has > 1,000 auxiliary modules.
+
+## Learning Objectives
+
+At the end of this scenario, the participants will:
+
+1. Be able to perform network reconnaissance, server enumeration, port and service enumeration using nmap to identify a vulnerable Linux server on an isolated network;
+2. Be able to run the Metasploit framework on a Linux virtual machine;
+3. Be able to identify a relevant exploit to use to gain command line access to a Linux server;
+4. Locate and hash any of the following cards: joker, 2 of spades, 10 of spades, king of spades, 6 of clubs, 8 of clubs, 10 of clubs, ace of clubs, 3 of hearts, 5 of hearts, 8 of hearts, 5 of diamonds, 7 of diamonds, 9 of diamonds.
+
+
+##  Use Metasploit to break into the vulnerable machine and find as many cards as you can.
+
+### 1. Hash of the card '8 of Clubs'
+
+### 2. Hash of the card '3 of Hearts'
+
+### 3. Hash of the card '2 of Spades'
+
+### 4. Hash of the card '10 of Spades'
+
+### 5. Hash of the card 'King of Spades'
+
+
+### 6. Hash of the card '10 of Clubs'
+
+### 7. Hash of the card '5 of Hearts'
+
+### 8. Hash of the card '5 of Diamonds'
+
+### 9. Hash of the card '9 of Diamonds'
+
+### 10. Hash of the card '6 of Clubs'
+
+### 11. Hash of the card 'Ace of Clubs'
+
+### 12. Hash of the card 'Joker'
+
+### 13. Hash of the card '8 of Hearts'
+
+### 14. Hash of the card '7 of Diamonds'
+

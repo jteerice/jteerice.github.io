@@ -1,0 +1,134 @@
+
+
+Fork a copy of https://github.com/UnseenWizzard/git_training. Then, clone the forked repo to your development environment.
+
+![pic](https://raw.githubusercontent.com/zacheller/git_training/master/img/components.png)
+
+```shell
+$ git clone git@github.com:zacheller/git_training.git
+$ cd git_training
+```
+
+![pic](https://raw.githubusercontent.com/zacheller/git_training/master/img/clone.png)
+
+## Adding new things
+
+```shell
+git_training$ touch Bob.txt
+git_training$ git add Bob.txt
+```
+![pic](https://raw.githubusercontent.com/zacheller/git_training/master/img/add.png)
+
+```shell
+git_training$ git commit -m "Move Bob.txt from Staging Area to Repository"
+[master 8527f11] Move Bob.txt from Staging Area to Repository
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 Bob.txt
+ ```
+
+![pic](https://raw.githubusercontent.com/zacheller/git_training/master/img/commit.png)
+
+```shell
+git_training$ git push
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 365 bytes | 365.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To github.com:zacheller/git_training.git
+   eb251e6..8527f11  master -> master
+```
+
+![pic](https://github.com/zacheller/git_training/blob/master/img/push.png)
+
+After push:
+
+![pic](https://raw.githubusercontent.com/zacheller/git_training/master/img/after_push.png)
+
+
+## Making changes
+```Shell
+git_training$ echo "Hi"'!!'" I'm Bob. I'm new here." > Bob.txt
+git_training$ git diff # operates on Working Directory Only
+diff --git a/Bob.txt b/Bob.txt
+index e69de29..3e8a5d3 100644
+--- a/Bob.txt
++++ b/Bob.txt
+@@ -0,0 +1 @@
++Hi!! I'm Bob. I'm new here.
+git_training$ git add Bob.txt
+git_training$ git diff # no output
+git_training$ git diff --staged
+diff --git a/Bob.txt b/Bob.txt
+index e69de29..3e8a5d3 100644
+--- a/Bob.txt
++++ b/Bob.txt
+@@ -0,0 +1 @@
++Hi!! I'm Bob. I'm new here.
+git_training$ echo "Hi"'!'" I'm Bob. I'm new here." > Bob.txt
+git_training$ git add Bob.txt
+git_training$ git commit -m "Add text to Bob"
+[master 904f3ee] Add text to Bob
+ 1 file changed, 1 insertion(+)
+git_training$ git log
+commit 904f3eea507962b62be4d056165835097feec1f1 (HEAD -> master)
+Author: {Name} <{email}>
+Date:   Thu Mar 26 11:40:48 2020 -0500
+
+    Add text to Bob
+
+commit 8527f117ffdafa7f334774feaa02b9fc4bdbdc63 (origin/master, origin/HEAD)
+Author: {Name} <{email}>
+Date:   Thu Mar 26 10:46:29 2020 -0500
+
+    Move Bob.txt from Staging Area to Repository
+[...]
+git_training$ git diff 904f3eea507962b62be4d056165835097feec1f1^!
+```
+```^!``` tells git to compare the commit to the one that came before it. An equivalent command would be ```git diff 8527f117ffdafa7f334774feaa02b9fc4bdbdc63 904f3eea507962b62be4```. The format here is ```git diff <from commit> <to commit>```, so our new commit comes second.
+
+```diff
+diff --git a/Bob.txt b/Bob.txt
+index e69de29..3ed0e1b 100644
+--- a/Bob.txt
++++ b/Bob.txt
+@@ -0,0 +1 @@
++Hi! I'm Bob. I'm new here.
+```
+
+![pic](https://raw.githubusercontent.com/zacheller/git_training/master/img/diffs.png)
+
+## Branching
+
+Branches live in the Local and Remote Repository. When you create a new branch, the branches contents will be a copy of the currently committed state of whatever branch you are currently working on. To create a new branch called change_alice you can run ```git branch change_alice```.
+
+This adds the new branch to the Local Repository.
+
+While your Working Directory and Staging Area don't really care about branches, you always commit to the branch you are currently on.
+
+
+![pic](https://github.com/zacheller/git_training/blob/master/img/add_branch.png)
+
+![pic](https://raw.githubusercontent.com/zacheller/git_training/master/img/checkout_branch.png)
+
+![pic](https://raw.githubusercontent.com/zacheller/git_training/master/img/branches.png)
+
+![pic](https://raw.githubusercontent.com/zacheller/git_training/master/img/before_ff_merge.png)
+
+![pic](https://github.com/zacheller/git_training/blob/master/img/ff_merge.png)
+
+![pic](https://raw.githubusercontent.com/zacheller/git_training/master/img/branches_diverge.png)
+
+![pic](https://raw.githubusercontent.com/zacheller/git_training/master/img/merge.png)
+
+![pic](https://raw.githubusercontent.com/zacheller/git_training/master/img/before_rebase.png)
+
+![pic](https://github.com/zacheller/git_training/blob/master/img/rebase.png)
+
+![pic](https://github.com/zacheller/git_training/blob/master/img/components.png)
+
+![pic](https://raw.githubusercontent.com/zacheller/git_training/master/img/many_dev_environments.png)
+
+
+

@@ -1,0 +1,18 @@
+Guest Escapes
+
+www.invisiblethingslab.com/resources/2011/Software%20Attacks%20on%20Intel%20VT-d.pdf
+invisiblethingslab.com/resources/bh08/part2-full.pdf
+http://www.phrack.org/papers/vm-escape-qemu-case-study.html
+https://www.youtube.com/watch?v=p0OaGMlBb2k
+https://www.darkreading.com/endpoint/xen-patches-worst-ever-virtual-machine-escape-vulnerability/d/d-id/1322925
+https://www.coresecurity.com/content/advisory-vmware
+https://www.blackhat.com/presentations/bh-usa-09/KORTCHINSKY/BHUSA09-Kortchinsky-Cloudburst-PAPER.pdf
+https://nakedsecurity.sophos.com/2015/05/14/the-venom-virtual-machine-escape-bug-what-you-need-to-know/
+https://www.techrepublic.com/article/10-new-vm-escape-vulnerabilities-discovered-in-virtualbox/
+
+
+VENOM, CLOUDBURST
+
+Mainly hypervisor vulnerabilities
+
+Try IO port exploits
