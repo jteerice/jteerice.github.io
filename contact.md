@@ -6,5 +6,8 @@ permalink: /contact/
 
 ### Contact me
 
-[zach@zacheller.dev](mailto:zach@zacheller.dev)
+Email: [zach@zacheller.dev](mailto:zach@zacheller.dev)
 
+LinkedIn: [zachellerdev](https://www.linkedin.com/in/zachellerdev/)
+
+Github: [zacheller](https://github.com/zacheller)

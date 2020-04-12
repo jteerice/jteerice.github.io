@@ -1,10 +1,10 @@
 ---
 permalink: /.well-known/security.txt
 ---
-
-# If you would like to report a security issue
-# or hire me, please use the following address
+# If you would like to report a security issue,
+# an exposed PII, or an interest in hiring me,
+# please use the following address.
 Contact: mailto:forward_my_packets@protonmail.com
 Preferred-Languages: en, es
-Canonical: zacheller.github.io/.well-known/security.txt
+Canonical: zacheller.dev/.well-known/security.txt
 # Flag: flag{h3ll0_STL_0W4SP_H0WR3_U?}
