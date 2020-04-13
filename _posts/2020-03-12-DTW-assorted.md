@@ -8,8 +8,7 @@ title: Defend The Web - Assorted Challenges
 Download the file. Change the filetype and open it.
 
 ![soln](/images/defend/24bit/soln.png)
-
-
+---
 ## Beach
 
 ![prompt](/images/defend/beach.png)
@@ -26,7 +25,7 @@ First guess was the following credentials, and they worked.
 
 Username: james
 Password: chocolate
-
+---
 ## Secure agent
 
 ![prompt](/images/defend/secure.png)
@@ -47,8 +46,7 @@ Cookie: PHPSESSID=aqk872qeadbgpess902phb70qo; cookies_dismissed=0; auth_remember
 Upgrade-Insecure-Requests: 1
 Cache-Control: max-age=0
 ```
-
-
+---
 ##  HTTP method / Intro
 
 Prompt: Use the POST method to send the password '07fed6c363' to this page
@@ -133,7 +131,7 @@ Content-Disposition: form-data; name="password"
 07fed6c363
 -----------------------------37042204124855--
 ```
-
+---
 ## Sid / Intro
 
 ![prompt](/images/defend/sid.png)

@@ -17,7 +17,7 @@ permalink: /whoami/
 * Pixel Artist
   * Lead art designer (and co-lead developer) for [Kat Attak](https://katattak.itch.io/kat-attak)
   * Contributer to [PixelJoint art gallery](http://pixeljoint.com/p/136425.htm)
-* Open Source Supporter and Contributor
+* Open Source Supporter
 * [Resume](https://github.com/zacheller/zacheller.github.io/blob/master/papers/resume.pdf)-haver
   
 ### Skills and Toolbelt
