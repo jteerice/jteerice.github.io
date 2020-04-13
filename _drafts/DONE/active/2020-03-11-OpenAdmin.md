@@ -75,6 +75,7 @@ Shellcodes: No Result
 Let's check the RCE bash script: /usr/share/exploitdb/exploits/php/webapps/47691.sh
 
 ```
+[...]
 # Exploit Title: OpenNetAdmin v18.1.1 RCE
 # Date: 2019-11-19
 # Exploit Author: mattpascoe
@@ -92,7 +93,7 @@ while true;do
 done
 ```
 
-Looks good to me!
+Looks good to me! If you would like to learn more about how this exploit actually works, check my [Exploit Analysis post](https://zacheller.dev/open-net-admin).
 
 ```bash
 root@kali:~/HackTheBox/OpenAdmin$ cp /usr/share/exploitdb/exploits/php/webapps/47691.sh ~/HackTheBox/OpenAdmin/
@@ -108,6 +109,7 @@ The carraige returns ('\r') tell me that this shell script is in a DOS format. L
 root@kali:~/HackTheBox/OpenAdmin$ dos2unix 47691.sh 
 dos2unix: converting file 47691.sh to Unix format...
 ```
+
 Let's get exploiting.
 
 ## Gaining Access
