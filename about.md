@@ -3,4 +3,4 @@ layout: page
 title: about
 permalink: /about/
 ---
-This site is an archive of my exploration into cyber security which includes solutions to CTF and pentesting challenges, research, and notes from meetups, workshops, webinars, and conferences that I attend (and occasionally run).
+My site is an archive of my exploration into cyber security which includes solutions to CTF and pentesting challenges, research, and notes from meetups, workshops, webinars, and conferences that I attend (and occasionally run).
