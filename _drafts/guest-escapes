@@ -16,3 +16,7 @@ VENOM, CLOUDBURST
 Mainly hypervisor vulnerabilities
 
 Try IO port exploits
+
+protocol errors
+
+RCE through shared folders

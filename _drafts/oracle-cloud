@@ -18,3 +18,20 @@ After jumping through the signup hoops, click on the hamburger menu to Compute>I
 ![pic](/images/oci/1.png)
 
 Then
+
+
+
+
+----
+from prev
+Followed: https://dgielis.blogspot.com/2019/09/free-oracle-cloud-7-setup-web-server-on.html
+There is a secret radio button to give your instance a public IP.
+
+sudo yum update
+sudo yum install nginx
+sudo systemctl start nginx
+sudo systemctl status nginx
+sudo firewall-cmd --permanent --zone=public --add-service=http
+sudo firewall-cmd --permanent --zone=public --add-service=https
+sudo firewall-cmd --reload
+

@@ -14,6 +14,10 @@ dpkg-reconfigure openssh-server #change default ssh keys
 systemctl enable ssh
 systemctl enable postgresql  # useful for metasploit
 ```
+### turn off the water dropping sound
+```
+dconf write /org/gnome/desktop/sound/event-sounds "false"
+```
 ### add a non-root user
 ```
 adduser <user>
