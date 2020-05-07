@@ -3,3 +3,14 @@ layout: post
 title: HackTheBox - Traceback
 ---
 
+Box IP: 10.10.10.181
+
+## Enumeration
+I generally like to do a full scan on all ports, and then run a more specific ```nmap``` command
+![pic](/images/htb/traceback/1.png)
+
+Looks like a standard webserver with ports open for HTTP and SSH. Let's check the site.
+
+![pic](/images/htb/traceback/2.png)
+
+Looks like we weren't the first ones here.
