@@ -46,6 +46,7 @@ To get started you need to find all the ways to provide data to the application 
 * Data coming from the database (for stored XSS and second-order injections for example)
 * Data read from a file or a cache
 * ...
+
 This method provides good coverage. However, you will need a good understanding of the framework/language used. Finally, you may end up reviewing the same function again and again if it's called multiple times.
 
 ### By functionality
@@ -100,13 +101,12 @@ We are also told to start with the "Read everything" approach since there are on
 * Authorisation bypass
 * Remote Code Execution
 
-## My Notes
+## Analysis
 
-### Files
-#### header.php:
-* if $user is not set, show login.php and register.php, else show logout.php
+### header.php:
+* If $user is not set, show login.php and register.php, else show logout.php.
 
-#### index.php:
+### index.php:
 * If not authorized, always redirected to login.php.
 * If the $_COOKIE['auth'] is set, the $user is set from the cookie!
 	* We could spoof an admin or any user account.
@@ -118,30 +118,31 @@ We are also told to start with the "Read everything" approach since there are on
 * Gets every file for a user as $file from the directory `/files/h($user)/h($file)`.
 * Has a form to submit pdf, but doesn't use the `accept` attribute to specify allowed mime-types. One could submit anything, including a malicious payload.
 
-#### footer.php:
-* nothing of note
+### footer.php:
+* Nothing of note.
 
-#### login.php:
+### login.php:
 * So far no $_SESSION checks, seems to be relying on database interaction. If you log in and never close the page, you could potentially be logged in forever. No CSRF token!
-* 
-* Format of "auth" cookie creation: 
+* Format of "auth" cookie creation
+  * `setcookie()` does not use the `secure` and `httpOnly` flags
 ```
 setcookie("auth", User::createcookie($_POST['username'], $_POST['password']));
 ```
-	* `setcookie()` does not use the `secure` and `httpOnly` flags
-* Has a rememberme checkbox, which doesn't appear to be hooked up to anything.
 
-#### logout.php:
+* Has a "Remember Me" checkbox, which doesn't appear to be hooked up to anything.
+
+### logout.php:
 * `User::logout();`
 * `die()` does not kill session information.
 
-#### register.php:
+### register.php:
 * Relies on `User::register()` to create a new user, so we need to check User class to see if username duplicates are allowed.
 * `setcookie()` does not use the `secure` and `httpOnly` flags
 * Doesn't even check for HTML special characters; no input validation besides a strict checking if the two  password fields contents match. 
 
-#### deploy.sql:
-* Hardcoded admin username and hashed password, admin:bcd86545c5903856961fa21b914c5fe4
+### deploy.sql:
+* Hardcoded admin username and hashed passsword
+
 ```sql
 create database cr;
 use cr;
@@ -151,12 +152,11 @@ create table users ( login VARCHAR(50) not null  primary key , password VARCHAR(
 INSERT INTO `users` (login,password) VALUES ('admin','bcd86545c5903856961fa21b914c5fe4');
 ```
 
-#### .git directory
-I'm not sure if this counts, but one could rebuild the source code for the entire application.
----
+### .git directory
+* One could rebuild the source code for the entire application.
 
-#### classes/db.php:
-Database name is `cr`, run on localhost.
+### classes/db.php:
+* Database name is `cr`, run on localhost.
 ```php
 <?php
     $lnk = mysql_connect("127.0.0.1", "pentesterlab", "pentesterlab");
@@ -164,25 +164,23 @@ Database name is `cr`, run on localhost.
 ?>
 ```
 
-#### classes/phpfix.php:
-According to the benchmark [here](http://paul-m-jones.com/post/2005/09/22/benchmarking-call_user_func_array/), `call_user_func_array()` is nearly twice as slow as `htmlentities()`.
-```php
+### classes/phpfix.php:
+* According to the benchmark [here](http://paul-m-jones.com/post/2005/09/22/benchmarking-call_user_func_array/), `call_user_func_array()` is nearly twice as slow as `htmlentities()`.
+ ```php
 <?php
   function h() {
     return call_user_func_array("htmlentities", func_get_args());
   }
-
 ?>
 ```
 
 #### classes/jwt.php:
 * Hardcoded secret (seed)
 * Crypto issues
-	* Hash instead of a HMAC, which would provide immunity against [length extension attacks](https://en.wikipedia.org/wiki/Length_extension_attack)
 	* The actual signing of the JSON Web Token (JWT), is not per its specification in [RFC 7519](https://tools.ietf.org/html/rfc7519#section-11.2), and so will not be valid across other applications. **Signing must occur before encryption**.
-
 > "While syntactically the signing and encryption operations for Nested JWTs may be applied in any order, if both signing and encryption are necessary, normally producers should sign the message and then encrypt the result (thus encrypting the signature). This prevents attacks in which the signature is stripped, leaving just an encrypted message, as well as providing privacy for the signer. Furthermore, signatures over encrypted text are not considered valid in many jurisdictions. 
 > Note that potential concerns about security issues related to the order of signing and encryption operations are already addressed by the underlying JWS and JWE specifications; in particular, because JWE only supports the use of authenticated encryption algorithms, cryptographic concerns about the potential need to sign after encryption that apply in many contexts do not apply to this specification."
+  * Hash instead of a HMAC, which would provide immunity against [length extension attacks](https://en.wikipedia.org/wiki/Length_extension_attack)
 ```php
 public static function signature($data) {
 	return hash("sha256","donth4ckmebr0".$data);
@@ -190,7 +188,7 @@ public static function signature($data) {
 ```
 
 * Signature bypass
-	* signature is only checked if it's provided in the auth token, and so is vulnerable to maliciously created tokens 
+	* signature is only checked if it's provided in the auth token, and so is vulnerable to maliciously created tokens.
 ```php
 public static function verify($auth) {
   list($h64,$d64,$sign) = explode(".",$auth);
@@ -205,7 +203,6 @@ public static function verify($auth) {
 
 * Authentication bypass
 	* For some reason there is a homebrew json parser instead of using `json_decode()` with a `RecursiveArrayIterator`. 
-
 ```php
 public static function parse_json($str) {
   $data = explode(",",rtrim(ltrim($str, '{'), '}'));
@@ -219,8 +216,8 @@ public static function parse_json($str) {
   return $ret;
 }
 ```
-	* Per user.php, the $data passed into the following function `sign()` is just the username in an dictionary. With how the tokens are assembled here, you could become an admin in the application injecting through the username, e.g. `fakename","username":"admin`. 
 
+* Per user.php, the $data passed into the following function `sign()` is just the username in an dictionary. With how the tokens are assembled here, you could become an admin in the application injecting through the username, e.g. `fakename","username":"admin`. 
 ```php
 public static function sign($data) {
   $header = str_replace("=","",base64_encode('{"alg":"HS256","iat":'.time().'}'));
@@ -237,9 +234,9 @@ public static function sign($data) {
 #### classes/user.php:
 * Weak password hashing mechanism
 	* md5
-	* not seeded
-	* hashing done on backend, which could be logged in the DB or transmitted in cleartext between DB and app
-	* recommendation: scrypt, bcrypt or PBKDF2
+	* Not seeded
+	* Hashing done on backend, which could be logged in the DB or transmitted in cleartext between DB and app.
+	* Recommendation: scrypt, bcrypt or PBKDF2
 ```php
 public static function register($user, $password) {
     $sql = "INSERT INTO  users (login,password) values (\"";
@@ -259,7 +256,6 @@ public static function register($user, $password) {
 ```
 * Directory listing
 	* Lists files in `files/[USERNAME]` and removes the parent and current directory from the list with `array_diff`. But since you can register users named `..`, `../..`, `../admin`, etc, you can look at any part of the server hosting the application.
-
 ```php
 public static function getfiles($user) {
   $base = "files/".$user;
@@ -274,8 +270,6 @@ public static function getfiles($user) {
 	* Uploaded files get saved in the `/files/[USER]/[FILENAME]` directory, and unless the filenames are hashed in some way, an attacker can bruteforce guessing usernames and filenames.
 * Remote Code Execution
 	* PDF validation is done in the same function with a `preg_match("/\.pdf/", $file)`. This only checks if the filename includes `.pdf`, which could be bypassed easily by naming files like `malicious.pdf.php`. As a `.php` file in the web root, it will get executed when accessed by the attacker. Correct usage to match end of filename string: `preg_match("/\.pdf$/", $file)`.
-
-
 ```php
 public static function addfile($user) {
   $file = "files/".$user."/".basename($_FILES["file"]["name"]);
