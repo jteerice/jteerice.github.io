@@ -1,0 +1,14 @@
+---
+layout: post
+title: STL OWASP QUARANTINE CTF
+---
+
+Capture the Flag (CTF) is a type of computer security competition usually designed to serve as an educational exercise to give participants experience in analyzing and exploiting security flaws. To give people more to do indoors, [Chris Elbring](https://www.linkedin.com/in/chris-elbring-jr-2a255968/) and I developed the fully remote QUARANTINE CTF hosted by [STL OWASP](https://www.meetup.com/OWASP-STL/events/268671040/). The competition included 58 challenges across 6 canonical categories and lasted from Tuesday, April 14, 2020, 7:00 PM to Tuesday, April 28, 2020, 7:00 PM CDT.
+
+![category_breakdown](/images/ctf/quarantine/category_breakdown.png)
+
+Chris hosted the CTF across a few load-balanced AWS EC2 instances. We had a great turnout and every challenged was solved by at least one person.
+
+![ctf_stats](/images/ctf/quarantine/ctf_stats.png)
+
+Thank you to [CONTRAST SECURITY](https://www.contrastsecurity.com/) for sponsoring this event.

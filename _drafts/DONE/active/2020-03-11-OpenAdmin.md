@@ -49,11 +49,11 @@ Navigating to 10.10.10.171:80, we get a default Apache2 Ubuntu page.
 
 Run dirbuster on 10.10.10.171 with the medium size wordlist. 
 
-![dirbuster.png](/images/openadmin/dirbuster.png)
+![dirbuster.png](/images/htb/openadmin/dirbuster.png)
 
 I tried /artwork and /music, but /ona is interesting. 
 
-![ONA](/images/openadmin/ona.png)
+![ONA](/images/htb/openadmin/ona.png)
 
 The server is using OpenNetAdmin v18.1.1, so let's check for vulns.
 
@@ -680,7 +680,7 @@ joanna@openadmin:~$
 
 ### Getting the User Flag
 
-![own user](/images/openadmin/user.png)
+![own user](/images/htb/openadmin/user.png)
 
 ---
 

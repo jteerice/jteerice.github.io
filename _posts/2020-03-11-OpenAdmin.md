@@ -7,7 +7,7 @@ OpenAdmin is an active challenge, so I will keep my solution offline until the c
 
 ### Getting the User Flag
 
-![own user](/images/openadmin/user.png)
+![own user](/images/htb/openadmin/user.png)
 
 ### Getting the Root Flag
 ```

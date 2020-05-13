@@ -120,7 +120,9 @@ After submitting feedback, we see in the customer feedback section of the /admin
 
 
 
+can you do a CSRF attack if XSS
 
+SQL injection 
 
 
 
@@ -133,7 +135,7 @@ Content-Disposition: form-data; name="file"; filename="test.pdf"
 Content-Type: application/pdf
 ```
 
-The body of the request contains the raw file.
+The body of the request observed in Burp contains the raw file.
 
 ```
 %PDF-1.5 %ÐÔÅØ 5 0 obj << /Length 79         /Filter /FlateDecode >> stream xÚs
