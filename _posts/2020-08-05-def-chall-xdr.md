@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Trend Micro Threat Defense Challenge: XDR Edition
+title: Trend Micro Threat Defense Challenge - XDR Edition
 ---
 
 ## Prompt

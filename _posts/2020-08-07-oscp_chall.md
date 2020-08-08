@@ -1,6 +1,6 @@
 ---
 layout: post
-title: InfoSec Prep: OSCP Vulnhub Box Walkthrough
+title: InfoSec Prep - OSCP Vulnhub Box Walkthrough
 ---
 The InfoSec Prep Discord server was giving away a OSCP voucher code to 10 random people who solved this Vulnhub [box](https://www.vulnhub.com/entry/infosec-prep-oscp,508/) and messaged the root flag to the TryHarder bot, so I entered the competition to test my luck. Here's my solution to the challenge.
 

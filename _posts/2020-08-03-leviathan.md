@@ -2,6 +2,9 @@
 layout: post
 title: OverTheWire - Leviathan 0-7
 ---
+
+## Prompt
+
 Dare you face the lord of the oceans?
 
 Leviathan is a wargame that has been rescued from the demise of intruded.net, previously hosted on leviathan.intruded.net.
