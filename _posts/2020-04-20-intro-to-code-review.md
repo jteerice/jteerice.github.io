@@ -201,7 +201,7 @@ public static function verify($auth) {
 }
 ```
 
-* Authentication bypass
+* Authentication bypass I
 	* For some reason there is a homebrew json parser instead of using `json_decode()` with a `RecursiveArrayIterator`. 
 ```php
 public static function parse_json($str) {
@@ -216,8 +216,8 @@ public static function parse_json($str) {
   return $ret;
 }
 ```
-
-* Per user.php, the $data passed into the following function `sign()` is just the username in an dictionary. With how the tokens are assembled here, you could become an admin in the application injecting through the username, e.g. `fakename","username":"admin`. 
+* Authentication bypass II
+  * Per user.php, the $data passed into the following function `sign()` is just the username in a dictionary. With how the tokens are assembled here, you could become an admin in the application injecting through the username, e.g. `fakename","username":"admin`. 
 ```php
 public static function sign($data) {
   $header = str_replace("=","",base64_encode('{"alg":"HS256","iat":'.time().'}'));
