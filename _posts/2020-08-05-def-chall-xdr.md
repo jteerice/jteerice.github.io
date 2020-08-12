@@ -12,13 +12,13 @@ Think you have what it takes to beat a hacker? Join us for the Trend Micro Threa
 
 ## Result
 
-I tied for first place with 100% of the questions answered and officially took second place in the Trend Micro Threat Defense Challenge at Blackhat USA 2020.
+I tied for first place with 100% of the questions answered and officially took second place in the Trend Micro Threat Defense Challenge at Blackhat USA 2020, winning a $100 Amazon gift card.
 
-[Team](/images/conf/blackhat20/xdr3.png)
+![Team](/images/conf/blackhat20/xdr3.png)
 
-[Scores](/images/conf/blackhat20/xdr2.png)
+![Scores](/images/conf/blackhat20/xdr2.png)
 
 
 It's definitely a powerful tool that you can pick up quickly.
 
-[Workbench](/images/conf/blackhat20/xdr1.png)
+![Workbench](/images/conf/blackhat20/xdr1.png)
