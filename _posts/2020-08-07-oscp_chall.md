@@ -60,7 +60,7 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 22.70 seconds
 ```
 
-The main wordpress site on port 80 gives a hint, that the only user besides root is named oscp. Checking the robots.txt disallowed entry at http://192.168.1.207/secret.txt, we find a encoded private ssh key. I saved that text into a local file called `secret.txt` and ran the following command: `cat secret.txt | base64 -d > id_rsa`.
+The main wordpress site on port 80 gives a hint, that the only user besides root is named oscp. Checking the robots.txt disallowed entry at http://192.168.1.207/secret.txt, we find a encoded private ssh key. I saved that text into a local file called `secret.txt` and ran the following command: `cat secret.txt | base64 -d > id_rsa`. Then `chmod 600 id_rsa`.
 
 ## Privilege Escalation
 
