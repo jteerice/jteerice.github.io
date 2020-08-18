@@ -67,8 +67,11 @@ So, who (or what) decides the hierarchy? Well...
 ### Quiz
 
 1. Name the key term of what a "Crawler" is used to do
+	* index
 2. What is the name of the technique that "Search Engines" use to retrieve this information about websites?
+	* crawling
 3. What is an example of the type of contents that could be gathered from a website?
+	* keywords
 
 ## Search Engine Optimisation
 
@@ -91,10 +94,15 @@ Introducing Robots.txt...
 ### Quiz
 
 4. Using the SEO Site Checkup tool on "tryhackme.com", does TryHackMe pass the “Meta Title Test”? (Yea / Nay)
+	* Yea
 5. Does "tryhackme.com" pass the “Keywords Usage Test?” (Yea / Nay)
+	* Yea
 6. Use https://neilpatel.com/seo-analyzer/ to analyse http://googledorking.cmnatic.co.uk: What "Page Score" does the Domain receive out of 100?
+	* 85/100
 7. With the same tool and domain in in the previous question, how many pages use “flash”?
+	* 0
 8. From a "rating score" perspective alone, what website would list first, tryhackme.com or googledorking.cmnatic.co.uk? Use tryhackme.com's score of 62/100 as of 31/03/2020 for this question.
+	* googledorking.cmnatic.co.uk
 
 ## Beepboop - Robots.txt
 
@@ -172,10 +180,18 @@ Why would you want to hide a .ini file for example? Well, files like this contai
 ### Quiz
 
 9. Where would "robots.txt" be located on the domain "ablog.com"
+	* ablog.com/robots.txt
 10. If a website was to have a sitemap, where would that be located?
+	* /sitemap.xml
 11. How would we only allow "Bingbot" to index the website?
+	* User-agent: Bingbot
 12. How would we prevent a "Crawler" from indexing the directory "/dont-index-me/"?
+	* Disallow: /dont-index-me/
 13. What is the extension of a Unix/Linux system configuration file that we might want to hide from "Crawlers"?
+	* .conf
+
+
+
 
 ## Sitemaps
 “Sitemaps” are indicative resources that are helpful for crawlers, as they specify the necessary routes to find content on the domain. The below illustration is a good example of the structure of a website, and how it may look on a "Sitemap":
@@ -198,8 +214,11 @@ The easier a website is to "Crawl", the more optimised it is for the "Search Eng
 ### Quiz
 
 14. What is the typical file structure of a "Sitemap"?
+	* XML
 15. What real life example can "Sitemaps" be compared to?
+	* map
 16. Name the keyword for the path taken for content on a website
+	* route
 
 ## What is Google Dorking?
 
@@ -230,26 +249,8 @@ Here is simple directory traversal.
 ### Quiz
 
 17. What would be the format used to query the site bbc.co.uk about flood defences
+	* site: bbc.co.uk flood defences
 18. What term would you use to search by file type?
+	* filetype:
 19. What term can we use to look for login pages?
-
-## Answers
-1. index
-2. crawling
-3. keywords
-4. Yea
-5. Yea
-6. 85/100
-7. 0
-8. googledorking.cmnatic.co.uk
-9. ablog.com/robots.txt
-10. /sitemap.xml
-11. User-agent: Bingbot
-12. Disallow: /dont-index-me/
-13. .conf
-14. XML
-15. map
-16. route
-17. site: bbc.co.uk flood defences
-18. filetype:
-19. intitle: login
+	* intitle: login
