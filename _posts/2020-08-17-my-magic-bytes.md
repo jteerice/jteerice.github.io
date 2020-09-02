@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 247/CTF - My Magic Bytes
+title: 247/CTF - MY MAGIC BYTES
 ---
 
 ## Prompt
