@@ -122,7 +122,7 @@ puts("bzzzzzzzzap. WRONG"bzzzzzzzzap. WRONG
 
 When we supply that string as the password, we are given a shell with leviathan4 privileges.
 
-```bash
+```
 leviathan3@leviathan:~$ ./level3
 Enter the password> snlprintf
 [You've got shell]!

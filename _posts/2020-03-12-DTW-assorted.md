@@ -8,6 +8,7 @@ title: Defend The Web - Assorted Challenges
 Download the file. Change the filetype and open it.
 
 ![soln](/images/defend/24bit/soln.png)
+
 ---
 ## Beach
 
@@ -22,9 +23,10 @@ User Comment                    : I like chocolate
 ```
 
 First guess was the following credentials, and they worked.
-
+```
 Username: james
 Password: chocolate
+```
 ---
 ## Secure agent
 

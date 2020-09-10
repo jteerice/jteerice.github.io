@@ -1,6 +1,6 @@
 ---
 layout: post
-title: HackTheBox - Infiltration
+title: HackTheBox - Infiltration (Active)
 ---
 Infiltration is an active challenge, so I will keep my solution offline until the challenge is retired.
 

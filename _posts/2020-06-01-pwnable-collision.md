@@ -1,6 +1,6 @@
 ---
 layout: post
-title: pwnable.kr - collision ()
+title: pwnable.kr - collision 
 ---
 
 ## Prompt
@@ -56,7 +56,7 @@ col@pwnable:~$ echo $((16#21DD09EC))
 
 So, we need to come up with five 4-byte integers that sum to 568134124.
 
-```python3
+```
 >>> 568134124/5
 113626824.8
 >>> 113626824*4

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: HackTheBox - Easy Phish
+title: HackTheBox - Easy Phish (Active)
 ---
 Easy Phish is an active challenge, so I will keep my solution offline until the challenge is retired.
 

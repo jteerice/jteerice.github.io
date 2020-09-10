@@ -33,7 +33,7 @@ int main(int argc, char* argv[], char* envp[]){
 
 }
 ```
-We need to pass in a string that will be converted into an integer and subtracted by 0x1234. The difference will be used as a file descriptor to be read from. The easiest to work with would be fd=0, which is for stdin. Then we can type the string to be compared to "LETMEWIN\n"; by pressing enter in stdin we'll be supplying the `\n`.
+We need to pass in a string that will be converted into an integer and subtracted by 0x1234. The difference will be used as a file descriptor to be read from. The easiest to work with would be fd=0, which is for stdin. Then we can submit the string to be compared to `LETMEWIN\n` by typing `LETMEWIN` into stdin and pressing enter--which appends `\n`.
 
 ```
 fd@pwnable:~$ echo $((16#1234))

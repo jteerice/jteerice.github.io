@@ -29,7 +29,7 @@ for i in range(500):
 
 	split = problem.split() # ['What', 'is', 'the', 'answer', 'to', '64', '+', '491?']
 
-	a = int(split[5])				# '64' -> 64
+	a = int(split[5])		# '64' -> 64
 	b = int(split[7].strip('?')) 	# '491?' -> 491
 
 	answer = (str(a+b)+'\r\n').encode("utf-8")

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: pwnable.kr - passcode
+title: pwnable.kr - random
 ---
 
 ## Prompt

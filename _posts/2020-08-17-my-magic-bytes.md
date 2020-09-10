@@ -20,7 +20,7 @@ Possible JPEG file Signatures: `FF D8 FF DB`, `FF D8 FF E0 00 10 4A 46 49 46 00 
 
 Encrypted magic bytes:
 ```
-$ xxd my_magic_bytes.jpg.enc|head
+$ xxd my_magic_bytes.jpg.enc|head -n 1
 00000000: b914 0645 71e0 b5f7 3707 cb85 47cc f9a4  ...Eq...7...G...
 ```
 
