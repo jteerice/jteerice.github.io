@@ -11,6 +11,7 @@ permalink: /whoami/
   * 1st place at STLCyberCon CTF (11/19)
   * 3rd place at STL Converge Tour CTF (11/19)
   * 1st place at VMWare Carbon Black CTF (02/20)
+  * 2nd place at Trend Micro Blackhat CTF (08/06)
 * Member and [Co-CTF Writer](https://www.meetup.com/OWASP-STL/events/268671040/) at St. Louis OWASP Chapter
 * Member and [Presenter](https://www.meetup.com/St-Louis-2600/events/skcdpnybcdbkb/) at St. Louis 2600 + DC314
 * Teacher, Tutor, Instructor and all around disseminator of technical information
