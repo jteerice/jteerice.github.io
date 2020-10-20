@@ -33,28 +33,27 @@ int betting() //Asks user amount to bet
 ```
 We cannot make a bet for more money than we have (`bet > cash`), but there is no additional check when you are asked again. There is also no lower limit on the bet, and we can bet negative numbers. Let's check how the winnings are totaled in the `play()` function:
 ```c
-while(i<=21) //While loop used to keep asking user to hit or stay at most twenty-one times
-                  //  because there is a chance user can generate twenty-one consecutive 1's
-     {
-         if(p==21) //If user total is 21, win
-         {
-             printf("\nUnbelievable! You Win!\n");
-             won = won+1;
-             cash = cash+bet;
-             printf("\nYou have %d Wins and %d Losses. Awesome!\n", won, loss);
-             dealer_total=0;
-             askover();
-         }
+while(i<=21){	// While loop used to keep asking user to hit or stay at most twenty-one times
+				//  because there is a chance user can generate twenty-one consecutive 1's
+	if(p==21) //If user total is 21, win
+	{
+		printf("\nUnbelievable! You Win!\n");
+		won = won+1;
+		cash = cash+bet;
+		printf("\nYou have %d Wins and %d Losses. Awesome!\n", won, loss);
+		dealer_total=0;
+		askover();
+	}
       
-         if(p>21) //If player total is over 21, loss
-         {
-             printf("\nWoah Buddy, You Went WAY over.\n");
-             loss = loss+1;
-             cash = cash - bet;
-             printf("\nYou have %d Wins and %d Losses. Awesome!\n", won, loss);
-             dealer_total=0;
-             askover();
-         }
+	if(p>21) //If player total is over 21, loss
+	{
+		printf("\nWoah Buddy, You Went WAY over.\n");
+		loss = loss+1;
+		cash = cash - bet;
+		printf("\nYou have %d Wins and %d Losses. Awesome!\n", won, loss);
+		dealer_total=0;
+		askover();
+	}
 ```
 The win logic seems fine, but the lose logic doesn't account for negative bets. It looks like we just have to stay after the cards are dealt and our negative bet will be subtracted from our cash total (i.e. we make money).
 
