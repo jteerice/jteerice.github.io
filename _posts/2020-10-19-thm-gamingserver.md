@@ -1,4 +1,7 @@
-
+---
+layout: post
+title: TryHackMe - GamingServer
+---
 
 ## Enumeration
 ```
