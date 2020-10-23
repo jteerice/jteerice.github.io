@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ./missing-semester - Data Wrangling Exercises
+title: ./missing-semester - Data Wrangling - Exercises
 ---
 Course located at: [missing.csail.mit.edu](https://missing.csail.mit.edu/)
 ## Exercises
