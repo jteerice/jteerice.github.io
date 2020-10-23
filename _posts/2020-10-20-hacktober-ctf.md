@@ -129,9 +129,6 @@ Just search for MYDDNS in the packet details. Frame 1497 contains the string: `s
 
 `flag{solution.myddns.me}`
 
-Name: global.asimov.events.data.trafficmanager.net
-
-
 ### An Evil Christmas Carol 2
 
 > What is the domain used by the post-infection traffic over HTTPS?
