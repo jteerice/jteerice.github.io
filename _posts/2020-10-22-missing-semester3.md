@@ -7,6 +7,7 @@ Course located at: [missing.csail.mit.edu](https://missing.csail.mit.edu/)
 
 1. Take this [short interactive regex tutorial](https://regexone.com/)
 2. Find the number of words (in /usr/share/dict/words) that contain at least three `a`s and don’t have a `'s` ending. What are the three most common last two letters of those words? sed’s y command, or the tr program, may help you with case insensitivity. How many of those two-letter combinations are there? And for a challenge: which combinations do not occur?
+
 ```
 $ sudo apt install wamerican-small
 
@@ -44,6 +45,7 @@ $ journalctl | grep -e "userspace" | head -n 10 | sed -E 's/^.*= (.*)s\./\1/g' |
 ```
 
 5. Look for boot messages that are not shared between your past three reboots.
+
 ```
 $ touch uniq_messages
 $ journalctl -b | tail -n +2 | sed -E 's/^.*kali (.*)$/\1/' | sort | uniq | sort >> uniq_messages
@@ -60,6 +62,7 @@ $ cat uniq_messages | sort | uniq -c | awk '{print $1}' | grep -v 3 | wc -l
 # All 7408 unshared lines
 $ cat uniq_messages | sort | uniq -c | sort -n |awk '{$1=$1};1'| sed -nE 's/^[^3] (.*)$/\1/p'
 ```
+
 6. Find an online data set. Fetch it using curl and extract out just two columns of numerical data. If you’re fetching HTML data, pup might be helpful. For JSON data, try jq. Find the min and max of one column in a single command, and the sum of the difference between the two columns in another.
 
 ```
