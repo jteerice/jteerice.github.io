@@ -6,24 +6,24 @@ Course located at: [missing.csail.mit.edu](https://missing.csail.mit.edu/)
 ## Exercises
 
 1. Take this [short interactive regex tutorial](https://regexone.com/)
-2. Find the number of words (in /usr/share/dict/words) that contain at least three `a`s and don’t have a `'s` ending. What are the three most common last two letters of those words? sed’s y command, or the tr program, may help you with case insensitivity. How many of those two-letter combinations are there? And for a challenge: which combinations do not occur?
+2. Find the number of words (in /usr/share/dict/words) that contain at least three `a`'s and don’t have a `'s` ending. What are the three most common last two letters of those words? sed’s y command, or the tr program, may help you with case insensitivity. How many of those two-letter combinations are there? And for a challenge: which combinations do not occur?
 
 ```
 $ sudo apt install wamerican-small
 
-# Find the number of words that contain at least three `a`s and don’t have a `'s` ending.
+$ # Find the number of words that contain at least three `a`s and don’t have a `'s` ending.
 $ cat /usr/share/dict/words | grep -E ".*a.*a.*a.*[^'s]$" | wc -l
 117
 
-# What are the three most common last two letters of those words?  
+$ # What are the three most common last two letters of those words?  
 $ cat /usr/share/dict/words | tr "[:upper:]" "[:lower:]" | grep -E "(a.*){3,}[^'s]$" | sed -E 's/^.*(..$)/\1/' | sort | uniq -c | sort -nr | head -n3 | awk '{print $2}' | paste -sd','
 al,ly,on
 
-# How many two-letter combinations are there?
+$ # How many two-letter combinations are there?
 $ cat /usr/share/dict/words | tr "[:upper:]" "[:lower:]" | grep -E "(a.*){3,}[^'s]$" | sed -E 's/^.*(..$)/\1/' | sort | uniq | wc -l
 31
 
-# And for a challenge: which combinations do not occur?
+$ # And for a challenge: which combinations do not occur?
 $ cat /usr/share/dict/words | tr "[:upper:]" "[:lower:]" | grep -E "(a.*){3,}[^'s]$" | sed -E 's/^.*(..$)/\1/' | sort | uniq > occured
 $ printf "%s\n" {a..z}{a..z} > all_two-letter
 $ comm occured all_two-letter -3 | awk '{print $1}' | paste -sd,
@@ -52,14 +52,14 @@ $ journalctl -b | tail -n +2 | sed -E 's/^.*kali (.*)$/\1/' | sort | uniq | sort
 $ journalctl -b -1 | tail -n +2 | sed -E 's/^.*kali (.*)$/\1/' | sort | uniq | sort >> uniq_messages
 $ journalctl -b -2 | tail -n +2 | sed -E 's/^.*kali (.*)$/\1/' | sort | uniq | sort >> uniq_messages
 
-# Shared
+$ # Shared
 $ cat uniq_messages | sort | uniq -c | awk '{print $1}' | grep 3 | wc -l
 658
-# Not Shared
+$ # Not Shared
 $ cat uniq_messages | sort | uniq -c | awk '{print $1}' | grep -v 3 | wc -l
 7408
 
-# All 7408 unshared lines
+$ # All 7408 unshared lines
 $ cat uniq_messages | sort | uniq -c | sort -n |awk '{$1=$1};1'| sed -nE 's/^[^3] (.*)$/\1/p'
 ```
 
