@@ -4,7 +4,7 @@ title: Workflow, or How I Make this Blog
 ---
 
 ## Purpose
-I recieved an email from someone that wanted to know how I constructed my website and what my workflow looks like. And, in drafting my response, I realized I may as well make it public in case others are interested.
+I received an email from someone that wanted to know how I constructed my website and what my workflow looks like. And, in drafting my response, I realized I may as well make it public in case others are interested.
 
 ## Creation
 I use Jekyll, a static site generator with built-in support for Github Pages. I first started with the basic Jekyll [repo](https://github.com/jekyll/jekyll), but wanted a more interesting look. So I found a Jekyll theme I liked and forked the repo for it. I named it `<github-username>.github.io>`, and then cloned it. I followed the included README for configuring my version. I modified the color scheme, replaced the background, added new icons, and changed and added some default page tabs, and I updated the `_config.yml` file. I also added a custom domain for my Github Pages site. At this point, the blog was ready to go. 
