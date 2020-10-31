@@ -4,19 +4,23 @@ title: whoami
 permalink: /whoami/
 ---
 ### Background
-* B.S./M.S. in Computer Science with cyber security focus
-* Head of Cyber Security Curriculum Development at The Coding School
-* Research on fuzzing embedded system binaries
-* Founding member of [b34r$hell](https://wustl-bearshell.github.io/) CTF Team
-  * 1st place at STLCyberCon CTF (11/19)
-  * 3rd place at STL Converge Tour CTF (11/19)
-  * 1st place at VMWare Carbon Black CTF (02/20)
-  * 2nd place at Trend Micro Blackhat CTF (08/20)
-* Member of [ARESx](https://ctftime.org/team/128734) CTF Team
-  * Ranked #21 in U.S. on CTFTime.org (10/20)
-* Member and [Co-CTF Writer](https://www.meetup.com/OWASP-STL/events/268671040/) at St. Louis OWASP Chapter
-* Member and [Presenter](https://www.meetup.com/St-Louis-2600/events/skcdpnybcdbkb/) at St. Louis 2600 + DC314
+* Head of Cyber Security Curriculum Development at The Coding School in LA
 * Teacher, Tutor, Instructor and all around disseminator of technical information
+* B.S./M.S. in Computer Science with cybersec focus
+  * Research on fuzzing embedded system binaries
+* CTF Competitor and Writer
+  * Current member of [ARESx](https://ctftime.org/team/128734) CTF Team
+    * Ranked #21 in U.S. on CTFTime.org (10/20)
+  * Founding member of [b34r$hell](https://wustl-bearshell.github.io/) CTF Team
+  * Co-Wrote [STL OWASP QUARANTINE CTF](https://www.meetup.com/OWASP-STL/events/268671040/)
+  * High Placements
+    * 1st place at STLCyberCon CTF (11/19)
+    * 3rd place at STL Converge Tour CTF (11/19)
+    * 1st place at VMWare Carbon Black CTF (02/20)
+    * 2nd place at Trend Micro Blackhat CTF (08/20)
+    * 1st place at Niflheim Network CTF (10/20)
+* Member of STL CYBER, and STL's OWASP and the Cloud Security Alliance Chapters
+* Occasional [Presenter](https://www.meetup.com/St-Louis-2600/events/skcdpnybcdbkb/) at St. Louis 2600 + DC314
 * Open Source Supporter and Contributer
 * Pixel Artist
   * Lead art designer (and co-lead developer) for [Kat Attak](https://katattak.itch.io/kat-attak)
