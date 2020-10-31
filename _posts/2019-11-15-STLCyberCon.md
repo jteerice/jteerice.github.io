@@ -1,6 +1,6 @@
 ---
 layout: post
-title: CTF - STLCyberCon
+title: STLCyberCon CTF
 ---
 
 The WUSTL CTF team [b34r$hell](https://wustl-bearshell.github.io/) won first place at the STLCyberCon CTF hosted by UMSL on November 15th, 2019.
