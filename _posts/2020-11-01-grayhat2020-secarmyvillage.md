@@ -3,7 +3,7 @@ layout: post
 title: SECARMY VILLAGE OSCP Challenge @ Grayhat 2020
 ---
 
-For Grayhat 2020, SECARMY VILLAGE put up a [Vulnhub Box](https://www.vulnhub.com/entry/secarmy-village-grayhat-conference,585/) and opened a CTFd at secarmyvillage.ml to submit flags. There were 10 flags to find on the box, and those that solved all of them would be elligible to win one of three PwK vouchers. I got all the flags and solved all the challenges, ending with 10,000 pointsin 1st place. Well... technically I was 106 and tied for first place with 113 other people, but I'm going to remember it like I won.
+For Grayhat 2020, SECARMY VILLAGE put up a [Vulnhub Box](https://www.vulnhub.com/entry/secarmy-village-grayhat-conference,585/) and opened a CTFd at secarmyvillage.ml to submit flags. There were 10 flags to find on the box, and those that solved all of them would be elligible to win one of three PwK vouchers. I got all the flags and solved all the challenges, ending with 10,000 pointsin 1st place. Well... technically I was 106th and tied for 1st place with 113 other people, but I'm going to remember it like I won.
 
 ## Enumeration
 ```

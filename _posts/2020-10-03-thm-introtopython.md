@@ -3,6 +3,8 @@ layout: post
 title: TryHackMe - Intro to Python
 ---
 
+Challenge Location: [TryHackMe](https://tryhackme.com/room/introtopython)
+
 This lesson is fairly straightforward, but necessary to complete for one (or more) of the learning paths. I'm already confident with Python, so here's my solution to the challenge problem.
 
 ## Challenge Time!
