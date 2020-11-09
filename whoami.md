@@ -17,8 +17,11 @@ permalink: /whoami/
     * 1st place at STLCyberCon CTF (11/19)
     * 3rd place at STL Converge Tour CTF (11/19)
     * 1st place at VMWare Carbon Black CTF (02/20)
-    * 2nd place at Trend Micro Blackhat CTF (08/20)
-    * 1st place at Niflheim Network CTF (10/20)
+    * 2nd place at Trend Micro CTF @Blackhat (08/20)
+    * 1st place at Niflheim's Network CTF @Grayhat (10/20)
+    * 1st place at SECARMY Village CTF @Grayhat (10/20)
+    * 1st place at Dyrwolf Inc's Cyber Weapon Range (10/20)
+    * 1st place at Secure Coding Tournament @LocoMocoSec (11/20) 
 * Member of STL CYBER, and STL's OWASP and the Cloud Security Alliance Chapters
 * Occasional [Presenter](https://www.meetup.com/St-Louis-2600/events/skcdpnybcdbkb/) at St. Louis 2600 + DC314
 * Open Source Supporter and Contributer

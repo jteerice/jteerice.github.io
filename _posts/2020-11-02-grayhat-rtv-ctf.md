@@ -25,7 +25,7 @@ I've seen fail2ban used for SSH, so I guessed `ssh` and it was the flag.
 
 ## Tweets
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Everyone gets a flag: ts{ThanksForPlaying}</p>&mdash; NOPResearcher (@NopResearcher) <a href="https://twitter.com/NopResearcher/status/1322262075566039040?ref_src=twsrc%5Etfw">October 30, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet tw-align-center"><p lang="en" dir="ltr">Everyone gets a flag: ts{ThanksForPlaying}</p>&mdash; NOPResearcher (@NopResearcher) <a href="https://twitter.com/NopResearcher/status/1322262075566039040?ref_src=twsrc%5Etfw">October 30, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 ## Trainer
