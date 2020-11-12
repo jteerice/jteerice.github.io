@@ -59,6 +59,7 @@ polo () {
       fi
   done
   cat /tmp/solve-out.txt /tmp/solve-error.txt
+  rm /tmp/solve-{out,error}.txt
   echo "The command took $runs runs to throw an error."
   ```
   **output**:
