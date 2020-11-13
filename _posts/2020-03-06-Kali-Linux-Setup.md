@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Kali Linux Setup
+title: My First Kali Linux Setup (2019.3)
 ---
 ## Setup and Initial Configuration
 ```
