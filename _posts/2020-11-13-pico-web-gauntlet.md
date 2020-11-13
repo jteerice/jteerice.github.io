@@ -1,7 +1,6 @@
 ---
 layout: post
-title: 
-picoCTF 2020 Mini-Competition - Web Gauntlet SQL Injection
+title: picoCTF 2020 Mini-Competition - Web Gauntlet SQL Injection
 ---
 
 In this challenge, we are linked to a login form we are meant to bypass with SQL injection. At each level the filter changes, so we have to update your injection as necessary.
