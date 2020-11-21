@@ -30,7 +30,7 @@ permalink: /whoami/
   * Contributer to [PixelJoint art gallery](http://pixeljoint.com/p/136425.htm)
 * [Resume](https://github.com/zacheller/zacheller.github.io/blob/master/papers/resume.pdf)-haver
   
-<script src="https://tryhackme.com/badge/198693"></script>
+<img src="https://tryhackme-badges.s3.amazonaws.com/omicronjob.png" alt="TryHackMe">
 
 ### Skills and Toolbelt
 
