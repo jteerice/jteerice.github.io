@@ -29,9 +29,10 @@ permalink: /whoami/
   * Lead art designer (and co-lead developer) for [Kat Attak](https://katattak.itch.io/kat-attak)
   * Contributer to [PixelJoint art gallery](http://pixeljoint.com/p/136425.htm)
 * [Resume](https://github.com/zacheller/zacheller.github.io/blob/master/papers/resume.pdf)-haver
-  
-<img src="https://tryhackme-badges.s3.amazonaws.com/omicronjob.png" alt="TryHackMe">
 
+<p align="center"> 
+<img src="https://tryhackme-badges.s3.amazonaws.com/omicronjob.png" alt="TryHackMe">
+</p>
 ### Skills and Toolbelt
 
 |Programming 	| C, Java, Python, Bash					|
