@@ -67,3 +67,26 @@ To make launching my preferred KeX mode simple, I added the following profile to
 
 You can check [here](https://www.kali.org/docs/wsl/win-kex/#optional-steps) for additional configurations. Do note, that you cannot put multiple profiles in your settings.json with the same "guid" field, as only one option will show.
 
+### Adding an Icon
+
+If you want to add an icon in your Windows Terminal tab, you have to take a couple extra steps.
+
+* Grab a Kali Menu icon from anywhere you want, though make sure its a PNG.
+
+* In File Explorer, put `%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState` in your search bar.
+
+* Paste the PNG into the RoamingState Folder
+
+* Add an additional line into your profile like so:
+
+```
+{
+	"guid": "{55ca431a-3a87-5fb3-83cd-11ececc031d2}",
+	"hidden": false,
+      	"icon": "ms-appdata:///roaming/<filename>.png",
+	"name": "Kali Seamless",
+	"commandline": "wsl -d kali-linux kex --sl --wtstart -s",
+	"startingDirectory" : "//wsl$/kali-linux/home/kali"
+},
+```
+
