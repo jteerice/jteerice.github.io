@@ -51,3 +51,19 @@ I followed the [Kali Guide](https://www.kali.org/docs/wsl/win-kex/#install-win-k
 	```
 	kex --sl -s
 	```
+
+## Optional: Windows Terminal
+
+To make launching my preferred KeX mode simple, I added the following profile to my Windows Terminal's settings.json file:
+```
+{
+	"guid": "{55ca431a-3a87-5fb3-83cd-11ececc031d2}",
+	"hidden": false,
+	"name": "Kali Seamless",
+	"commandline": "wsl -d kali-linux kex --sl --wtstart -s",
+	"startingDirectory" : "//wsl$/kali-linux/home/kali"
+},
+```
+
+You can check [here](https://www.kali.org/docs/wsl/win-kex/#optional-steps) for additional configurations. Do note, that you cannot put multiple profiles in your settings.json with the same "guid" field, as only one option will show.
+
