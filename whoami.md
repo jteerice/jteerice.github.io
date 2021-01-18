@@ -10,7 +10,8 @@ permalink: /whoami/
   * Research on fuzzing embedded system binaries
 * CTF Competitor and Writer
   * Current member of [ARESx](https://ctftime.org/team/128734) CTF Team
-    * Ranked #21 in U.S. on CTFTime.org (10/20)
+    * Ranked #1 in U.S. on CTFTime.org (Jan 2021)
+    * Ranked #18 in U.S. on CTFTime.org (2020)
   * Founding member of [b34r$hell](https://wustl-bearshell.github.io/) CTF Team
   * Co-Wrote [STL OWASP QUARANTINE CTF](https://www.meetup.com/OWASP-STL/events/268671040/)
   * High Placements
