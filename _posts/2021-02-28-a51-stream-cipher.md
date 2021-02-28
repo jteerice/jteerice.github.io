@@ -11,9 +11,9 @@ A5/1 is based around a combination of three [linear feedback shift registers](ht
 
 | LFSR number | Length in bits |              Feedback polynomial              | Clocking bit |   Tapped bits  |
 |:-----------:|:--------------:|:---------------------------------------------:|:------------:|:--------------:|
-| 1           | 19             | x<sup>19</sup>+x<sup>18</sup>+x<sup>17</sup>+x<sup>14</sup>+1</sup>       | 8            | 13, 16, 17, 18 |
-| 2           | 22             |  x<sup>22</sup>+x<sup>21</sup>+1</sup>           | 10           | 20, 21         |
-| 3           | 23             |  x<sup>23</sup>+x<sup>22</sup>+x<sup>21</sup>+x<sup>8</sup>+1</sup> | 10           | 7, 20, 21, 22  |
+| 1           | 19             | x<sup>19</sup>+x<sup>18</sup>+x<sup>17</sup>+x<sup>14</sup>+1       | 8            | 13, 16, 17, 18 |
+| 2           | 22             |  x<sup>22</sup>+x<sup>21</sup>+1         | 10           | 20, 21         |
+| 3           | 23             |  x<sup>23</sup>+x<sup>22</sup>+x<sup>21</sup>+x<sup>8</sup>+1 | 10           | 7, 20, 21, 22  |
 
 A register is clocked if its clocking bit agrees with the clocking bit of one or both of the other two registers. Hence at each step at least two or three registers are clocked, and each register steps with probability 3/4.
 
@@ -23,7 +23,9 @@ A register is clocked if its clocking bit agrees with the clocking bit of one or
 Suppose that, after a particular step, the values in the registers are:
 
 X = (x<sub>0</sub>, x<sub>1</sub>, . . . , x<sub>18</sub>) = (1010101010101010101)
-Y = (y<sub>0</sub>, y<sub>1</sub>, . . . , y<sub>21</sub>) = (1100110011001100110011) 
+
+Y = (y<sub>0</sub>, y<sub>1</sub>, . . . , y<sub>21</sub>) = (1100110011001100110011)
+
 Z = (z<sub>0</sub>, z<sub>1</sub>, . . . , z<sub>22</sub>) = (11100001111000011110000)
 
 Our goal is to print the next keystream bits, so that if we had some ciphertext, we could use XOR to decode it.
