@@ -8,16 +8,14 @@ A5/1 is a stream cipher used to provide over-the-air communication privacy in th
 A GSM transmission is organized as sequences of _bursts_. In a typical channel and in one direction, one burst is sent every 4.615 milliseconds and contains 114 bits available for information. A5/1 is used to produce for each burst a 114 bit sequence of [keystream](https://en.wikipedia.org/wiki/Keystream "Keystream") which is [XORed](https://en.wikipedia.org/wiki/XOR "XOR") with the 114 bits prior to modulation. A5/1 is initialized using a 64-bit [key](https://en.wikipedia.org/wiki/Key_(cryptography) "Key (cryptography)") together with a publicly known 22-bit frame number.
 
 A5/1 is based around a combination of three [linear feedback shift registers](https://en.wikipedia.org/wiki/Linear_feedback_shift_register "Linear feedback shift register") (LFSRs) with irregular clocking. The three shift registers are specified as follows:
+
 | LFSR number | Length in bits |              Feedback polynomial              | Clocking bit |   Tapped bits  |
 |:-----------:|:--------------:|:---------------------------------------------:|:------------:|:--------------:|
 | 1           | 19             | x<sup>19</sup>+x<sup>18</sup>+x<sup>17</sup>+x<sup>14</sup>+1</sup>       | 8            | 13, 16, 17, 18 |
 | 2           | 22             |  x<sup>22</sup>+x<sup>21</sup>+1</sup>           | 10           | 20, 21         |
 | 3           | 23             |  x<sup>23</sup>+x<sup>22</sup>+x<sup>21</sup>+x<sup>8</sup>+1</sup> | 10           | 7, 20, 21, 22  |
-A register is clocked if its clocking bit (orange) agrees with the clocking bit of one or both of the other two registers. 
-<p align="center">
-	<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/A5-1_GSM_cipher.svg/350px-A5-1_GSM_cipher.svg.png">  
-</p>
-Hence at each step at least two or three registers are clocked, and each register steps with probability 3/4.
+
+A register is clocked if its clocking bit agrees with the clocking bit of one or both of the other two registers. Hence at each step at least two or three registers are clocked, and each register steps with probability 3/4.
 
 > Source: [Wikipedia](https://en.wikipedia.org/wiki/A5/1)
 
