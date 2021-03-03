@@ -62,7 +62,6 @@ def main():
 
     print(str(numKeystreamBits) + "-bit keystream: " + keystream)
 
-# X register is clocked
 def clockedX(x):
     newBit = x[13] ^ x[16] ^ x[17] ^ x[18]
     return shift(x, newBit)
@@ -76,14 +75,12 @@ def clockedZ(z):
     return shift(z, newBit)
 
 def shift(arr, newBit):
-    # print("arr:    "+ str(arr))
     arr.pop(-1) # pop off the last element
     arr.insert(0, newBit) # add new bit to the front
     return arr
 
 # Find if 0 or 1 is more popular across x[8], y[10], and z[10] (aka the clocking bits)
 def vote(xBit,yBit,zBit):
-    
     return (xBit & yBit) ^ (xBit & zBit) ^ (yBit & zBit)
 
 def printState(x,y,z):
