@@ -100,7 +100,7 @@ for _ in range(100):
         c = int(line[1].split('=')[1])  # 9
 
         start = 0
-        end = n
+        end = n - 1
 
         for _ in range(c):
 

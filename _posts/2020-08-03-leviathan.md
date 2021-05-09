@@ -150,6 +150,8 @@ fopen("/etc/leviathan_pass/leviathan5", "r")                  = 0
 +++ exited (status 255) +++
 leviathan4@leviathan:~/.trash$ ./bin
 01010100 01101001 01110100 01101000 00110100 01100011 01101111 01101011 01100101 01101001 00001010
+leviathan4@leviathan:~/.trash$ echo "01010100 01101001 01110100 01101000 00110100 01100011 01101111 01101011 01100101 01101001 00001010" | tr -d ' ' |perl -lpe '$_=pack"B*",$_'
+Tith4cokei
 ```
 Converting the binary to ASCII gives us `Tith4cokei`.
 
