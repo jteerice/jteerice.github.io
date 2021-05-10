@@ -16,7 +16,7 @@ Curious... I started writing out which characters were missing in each line. Aft
 $ echo -n "BANK OF E SAVINGS AND LOAN" | wc -c
 26
 ```
-What else has 26 characters? The English alphabet. For each wonky string, I wrote down the index of the missing character (0-25). For example: the string `ANK OF E SAVINGS AND LOAN` becomes `0`, and the string `BANKOF E SAVINGS AND LOAN` becomes `4`. I then and translated that into the corresponding letter at that position in the alphabet using Python.
+What else has 26 characters? The English alphabet. For each wonky string, I wrote down the index of the missing character (0-25). For example: the string `ANK OF E SAVINGS AND LOAN` becomes `0`, and the string `BANKOF E SAVINGS AND LOAN` becomes `4`. I then translated that into the corresponding letter at that position in the alphabet using Python.
 
 
 ```py
