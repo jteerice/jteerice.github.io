@@ -1,0 +1,4 @@
+---
+permalink: /.well-known/canary.txt
+---
+The FBI has not been here.
