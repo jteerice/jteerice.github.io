@@ -1,5 +1,5 @@
 title: zacheller@home:~/blog$
-description: " Aspiring pentester with passion for all things cyber"
+description: "Cybersecurity blog by a programming, pentesting, and pedagogy enthusiast."
 author:
   name: "Zach Heller"
   email: "zach@zacheller.dev"
@@ -29,4 +29,4 @@ plugins:
 
 # Custom variables
 owner : "zacheller"
-year : "2020"
+year : "2022"

@@ -36,7 +36,7 @@ permalink: /whoami/
 |Programming  |Python, Java, C |
 |Full-Stack Development |Spring Boot, Django, LAMP |
 |Shell Scripting|Bash, Zsh, Powershell |
-|System Admininistration |AWS, OCI, Debian, RHEL, Docker |
+|System Administration |AWS, OCI, Debian, RHEL, Docker |
 |Penetration Testing  |GWAPT, nmap, OWASP ZAP, hydra |
 |SIEM and SOAR | QRadar, Splunk, XSOAR, CBR |
 |Zscaler  |ZCCA-PA, ZCCA-IA, ZCA  |
