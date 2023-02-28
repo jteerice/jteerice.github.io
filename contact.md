@@ -6,8 +6,8 @@ permalink: /contact/
 
 ### Contact me
 
-LinkedIn: [zachellerdev](https://www.linkedin.com/in/zachellerdev/)
+LinkedIn: [Jake Rice](https://www.linkedin.com/in/jake-t-rice/)
 
-Email: [zach@zacheller.dev](mailto:zach@zacheller.dev)
+Email: [ajke-rice@outlook.com](mailto:jake-rice@outlook.com)
 
-Github: [zacheller](https://github.com/zacheller)
+Github: [jteerice](https://github.com/jteerice)
