@@ -7,7 +7,8 @@ title: Binary Exploitation - Pwnable_kr/Input2
 
 After using ```scp``` to copy the binary and c file locally, we can use ```cat``` to take a look at the c file.
 
-```└─$ cat input.c                
+```
+└─$ cat input.c                
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
