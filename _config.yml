@@ -1,9 +1,9 @@
-title: zacheller@home:~/blog$
-description: "Cybersecurity blog by a programming, pentesting, and pedagogy enthusiast."
+title: jteerice@home:~/blog$
+description: "Cybersecurity blog by a programming and penetration testing enthusiast."
 author:
-  name: "Zach Heller"
-  email: "zach@zacheller.dev"
-  url: "https://zacheller.github.io"
+  name: "Jake Rice"
+  email: "jake-rice@outlook.com"
+  url: "https://jteerice.github.io"
 
 baseurl: /
 
@@ -28,5 +28,5 @@ plugins:
   - jekyll-sitemap
 
 # Custom variables
-owner : "zacheller"
-year : "2022"
+owner : "JakeRice"
+year : "2023"
