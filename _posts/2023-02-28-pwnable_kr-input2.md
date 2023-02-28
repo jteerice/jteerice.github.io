@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Binary Expoitation: Pwnable_kr - Input2 
+title: Binary Expoitation: Pwnablekr - Input2 
 ---
 
 ## Static Analysis
