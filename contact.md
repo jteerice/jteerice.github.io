@@ -8,6 +8,6 @@ permalink: /contact/
 
 LinkedIn: [Jake Rice](https://www.linkedin.com/in/jake-t-rice/)
 
-Email: [ajke-rice@outlook.com](mailto:jake-rice@outlook.com)
+Email: [jake-rice@outlook.com](mailto:jake-rice@outlook.com)
 
 Github: [jteerice](https://github.com/jteerice)
