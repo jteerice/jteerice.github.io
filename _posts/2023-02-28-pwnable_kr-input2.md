@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Hello World!
+title: Binary Exploitation - Pwnable_kr/Input2
 ---
 
 ## Static Analysis
