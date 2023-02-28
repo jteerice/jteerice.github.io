@@ -121,7 +121,7 @@ int main(int argc, char** argv)
 	return 0;
 }
 ```
-Now let's go through the program line by line. To start, I initialized a ```char``` pointer array with 101 elements. TEven though the arguments are zero indexed, the ```char``` pointer array passed to the ```execve``` function must be null terminated, so we need to add an additional element for the null terminator.
+Now let's go through the program line by line. To start, I initialized a ```char``` pointer array with 101 elements. Even though the arguments are zero indexed, the ```char``` pointer array passed to the ```execve``` function must be null terminated, so we need to add an additional element for the null terminator.
 
 Next, I use a ```for``` loop to fill the array with arbitrary values. The next line replaces the first element with the name of the binary to be executed by ```execve```. Then I replace indexes ```'A'``` and ```'B'``` with the necessary values, and finish with the null terminator at index 100.
 
