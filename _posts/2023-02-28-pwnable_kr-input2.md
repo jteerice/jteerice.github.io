@@ -122,9 +122,9 @@ int main(int argc, char** argv)
 	return 0;
 }
 ```
-Now let's go through the program line by line. To start, I initialized a ```char``` pointer array with 101 elements. Even though the arguments are zero indexed, the ```char``` pointer array passed to the ```execve``` function must be null terminated, so we need to add an additional element for the null terminator.
+Now let's go through the program line by line. To start, we initialize a ```char``` pointer array with 101 elements. Even though the arguments are zero indexed, the ```char``` pointer array passed to the ```execve``` function must be null terminated, so we need to add an additional element for the null terminator.
 
-Next, I use a ```for``` loop to fill the array with arbitrary values. The next line replaces the first element with the name of the binary to be executed by ```execve```. Then I replace indicies ```'A'``` and ```'B'``` with the necessary values, and finish with the null terminator at index 100.
+Next, we use a ```for``` loop to fill the array with arbitrary values. The next line replaces the first element with the name of the binary to be executed by ```execve```. Then we replace indicies ```'A'``` and ```'B'``` with the necessary values, and finish with the null terminator at index 100.
 
 Running this program, we can see that it worked.
 ```
@@ -196,7 +196,7 @@ Here is my solution for stage 2:
 		execve("/home/jake/Desktop/pwnable_kr/input/breakme", args, NULL);
 	}
 ```
-Let's take a closer look at the code. To start, we declare two integer arrays that will serve as the file descriptors for our two pipes. We call ```pipe``` on both integer arrays and check to ensure that the system call completed successfully. Next, we fork the process and check to ensure ```fork``` returned properly. If ```fork``` returned 0, we know we are in the child process and close the read ends of the pipes. Next, we write the required data into both pipes. Now the else block executes and the parent process closes the write ends of the pipe and duplicates the read ends of the pipe into ```stdin``` and ```stderr```. Finally, we close the read ends of the pipe in order to close the pipe and call ```execve```.
+Let's take a closer look at the code. To start, we declare two integer arrays that will serve as the file descriptors for our two pipes. We call ```pipe``` on both integer arrays and check to ensure that the system call completed successfully. Next, we fork the process and check to ensure ```fork``` returned properly. If ```fork``` returned 0, we know we are in the child process and close the read ends of the pipes. Next, we write the required data into both pipes. Now the ```else``` block executes and the parent process closes the write ends of the pipe and duplicates the read ends of the pipe into ```stdin``` and ```stderr```. Finally, we close the read ends of the pipe in order to close the pipe and call ```execve```.
 
 Compiling and running the program shows that we are successful.
 
