@@ -144,5 +144,7 @@ Let's take a look at the code block for the next stage.
         if(memcmp(buf, "\x00\x0a\x02\xff", 4)) return 0;
 	printf("Stage 2 clear!\n");
 ```
+This code block is pretty straightforward. A ```char``` array containing 4 bytes is initialized on the stack followed by a ```read``` function call. The ```read``` function reads 4 bytes from file descriptor 0 (stdin) into the ```char``` array. Then ```memcmp``` is called which compares 4 bytes in the ```char``` array with the bytes indicated. If it does not match, the program exits. The same process is repeated, but instead of file descriptor 0, ```read``` is called using file descriptor 2 (stderr).
+
 
 
