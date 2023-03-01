@@ -22,6 +22,7 @@ permalink: /whoami/
 |Reverse Engineering |gdb, IDA, Ghidra |
 |Virtaulization |VMWare, VirtualBox  |
 |Network Protocols |TCP/IP, UDP, DNS, ICMP, DHCP, HTTP, ARP, LDAP|
+|Network Administration |Wireshark |
 
 <p align="center"> 
 </p>
