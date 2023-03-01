@@ -153,7 +153,7 @@ To accomplish this, we can utilize pipes.
 ##### Pipe
 Pipes are a mechanism for interprocess communication. When you use the ```|``` symbol in a shell, you are creating a pipe from the preceding process to the following process. A pipe writes input on one end and reads output from the other. To create a pipe, we can utilize the ```pipe``` system call. More information on creating pipes in the C language can be found [here](https://tldp.org/LDP/lpg/node11.html).
 
-The ```pipe``` system call takes a single argument which is an array of two integers. The return value is an array of two integers which represent the input (read) and output (write) ends of the pipe. 
+The ```pipe``` system call takes a single argument which is an array of two integers. The return value is an array of two integers which represent the input (write) and output (read) ends of the pipe. 
 
 By using the pipe, we can use the ```fork``` system call which creates a duplicate process of the calling process. If successful, the return value of ```fork``` is the ```pid``` (process id) of the child in the parent and ```0``` in the child. Otherwise, ```fork``` will return ```-1``` to indicate that the system call failed. We can use this to determine if the current process is the parent or the child.
 
