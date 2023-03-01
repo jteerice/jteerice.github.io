@@ -5,6 +5,8 @@ title: Binary Exploitation - Pwnable_kr/Input2
 
 ## Pwnable_kr: Input - Write-up
 
+This is a fairly straightforward binary exploitation challenge on Pwnable_kr that centers around passing input to a program. First we can try and exploit the program locally, then write an exploit that we can use to retrieve the flag remotely.
+
 After using ```scp``` to copy the binary and c file locally, we can use ```cat``` to take a look at the c file.
 
 ```
@@ -145,6 +147,13 @@ Let's take a look at the code block for the next stage.
 	printf("Stage 2 clear!\n");
 ```
 This code block is pretty straightforward. A ```char``` array containing 4 bytes is initialized on the stack followed by a ```read``` function call. The ```read``` function reads 4 bytes from file descriptor 0 (stdin) into the ```char``` array. Then ```memcmp``` is called which compares 4 bytes in the ```char``` array with the bytes indicated. If it does not match, the program exits. The same process is repeated, but instead of file descriptor 0, ```read``` is called using file descriptor 2 (stderr).
+
+To accomplish this, we can utilize pipes.
+
+##### Pipes
+Pipes are a mechanism for interprocess communication. When you use the ```|``` symbol in a shell, you are creating a pipe from the preceding process to the following process. More information on creating pipes in the C language can be found [here](https://tldp.org/LDP/lpg/node11.html).
+
+
 
 
 
