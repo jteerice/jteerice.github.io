@@ -159,6 +159,58 @@ By using the pipe, we can use the ```fork``` system call which creates a duplica
 
 We need to know if the current process is either the parent or child so we know which file descriptor to close. According to [Creating Pipes in C](https://tldp.org/LDP/lpg/node11.html), if the current process is the child, we need to send data to the parent. In this case, we need to close ```fd[0]```. If the current process is the parent, we need to send data to the child. In this case, we would need to close ```fd[1]```. This is to ensure that the communicating processes don't get stuck in a loop with the same data being sent back and forth.
 
+Here is my solution for stage 2:
+```
+int stdinStream[2];
+int stderrStream[2];    
+pid_t childPid; 
+
+if (pipe(stdinStream) < 0 || pipe(stderrStream) < 0)
+        {
+                printf("pipes failed!\n");
+                exit(1);
+        }       
+        if ((childPid = fork()) < 0)
+        {
+                printf("fork failed!\n");
+                exit(1);
+        }
+        if (childPid == 0)
+        {
+                close(stdinStream[0]);  
+                close(stderrStream[0]); 
+        
+                write(stdinStream[1], "\x00\x0a\x00\xff", 4);   
+                write(stderrStream[1], "\x00\x0a\x02\xff", 4);  
+        }
+        else 
+        {
+                close(stdinStream[1]);
+                close(stderrStream[1]);
+
+                dup2(stdinStream[0], 0);
+                dup2(stderrStream[0], 2);
+
+                close(stdinStream[0]);
+                close(stderrStream[0]); 
+                execve("/home/jake/Desktop/pwnable_kr/input/breakme", args, NULL);
+        }
+```
+Let's take a closer look at the code. To start, we declare two integer arrays that will serve as the file descriptors for our two pipes. We call ```pipe``` on both integer arrays and check to ensure that the system call completed successfully. Next, we fork the process and check to ensure ```fork``` returned properly. If ```fork``` returned 0, we know we are in the child process and close the read ends of the pipes. Next, we write the required data into both pipes. Now the else block executes and the parent process closes the write ends of the pipe and duplicates the read ends of the pipe into ```stdin``` and ```stderr```. Finally, we close the read ends of the pipe in order to close the pipe and call ```execve```.
+
+Compiling and running the program shows that we are successful.
+
+```
+└─$ ./test                
+Welcome to pwnable.kr
+Let's see if you know how to give input to program
+Just give me correct inputs then you will get the flag :)
+Stage 1 clear!
+Stage 2 clear!
+zsh: segmentation fault  ./test
+```
+### env
+
 
 
 
