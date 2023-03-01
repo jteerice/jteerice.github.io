@@ -161,40 +161,40 @@ We need to know if the current process is either the parent or child so we know 
 
 Here is my solution for stage 2:
 ```
-int stdinStream[2];
-int stderrStream[2];    
-pid_t childPid; 
+        int stdinStream[2];
+	int stderrStream[2];	
+	pid_t childPid;	
 
-if (pipe(stdinStream) < 0 || pipe(stderrStream) < 0)
-        {
-                printf("pipes failed!\n");
-                exit(1);
-        }       
-        if ((childPid = fork()) < 0)
-        {
-                printf("fork failed!\n");
-                exit(1);
-        }
-        if (childPid == 0)
-        {
-                close(stdinStream[0]);  
-                close(stderrStream[0]); 
-        
-                write(stdinStream[1], "\x00\x0a\x00\xff", 4);   
-                write(stderrStream[1], "\x00\x0a\x02\xff", 4);  
-        }
-        else 
-        {
-                close(stdinStream[1]);
-                close(stderrStream[1]);
+	if (pipe(stdinStream) < 0 || pipe(stderrStream) < 0)
+	{
+		printf("pipes failed!\n");
+		exit(1);
+	}	
+	if ((childPid = fork()) < 0)
+	{
+		printf("fork failed!\n");
+		exit(1);
+	}
+	if (childPid == 0)
+	{
+		close(stdinStream[0]);	
+		close(stderrStream[0]);	
+	
+		write(stdinStream[1], "\x00\x0a\x00\xff", 4);	
+		write(stderrStream[1], "\x00\x0a\x02\xff", 4);	
+	}
+	else 
+	{
+		close(stdinStream[1]);
+		close(stderrStream[1]);
 
-                dup2(stdinStream[0], 0);
-                dup2(stderrStream[0], 2);
+		dup2(stdinStream[0], 0);
+		dup2(stderrStream[0], 2);
 
-                close(stdinStream[0]);
-                close(stderrStream[0]); 
-                execve("/home/jake/Desktop/pwnable_kr/input/breakme", args, NULL);
-        }
+		close(stdinStream[0]);
+		close(stderrStream[0]);	
+		execve("/home/jake/Desktop/pwnable_kr/input/breakme", args, NULL);
+	}
 ```
 Let's take a closer look at the code. To start, we declare two integer arrays that will serve as the file descriptors for our two pipes. We call ```pipe``` on both integer arrays and check to ensure that the system call completed successfully. Next, we fork the process and check to ensure ```fork``` returned properly. If ```fork``` returned 0, we know we are in the child process and close the read ends of the pipes. Next, we write the required data into both pipes. Now the else block executes and the parent process closes the write ends of the pipe and duplicates the read ends of the pipe into ```stdin``` and ```stderr```. Finally, we close the read ends of the pipe in order to close the pipe and call ```execve```.
 
