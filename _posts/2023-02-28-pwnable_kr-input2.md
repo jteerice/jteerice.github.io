@@ -127,7 +127,6 @@ Next, I use a ```for``` loop to fill the array with arbitrary values. The next l
 Running this program, we can see that it worked.
 ```
 └─$ ./test
-Before
 Welcome to pwnable.kr
 Let's see if you know how to give input to program
 Just give me correct inputs then you will get the flag :)
