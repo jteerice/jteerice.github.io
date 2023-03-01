@@ -91,9 +91,9 @@ Let's take a look at the code block for the first challenge more closely.
 	printf("Stage 1 clear!\n");
 ```
 
-We can see that the program expects 100 arguments and will exit otherwise. Additionally, the argument at index ```'A'``` should be a null byte, and the argument at index ```'B'``` should be ```"\x20\x0a\x0d```. To accomplish this, I will make use of the ```execve``` function in C.
+We can see that the program expects 100 arguments and will exit otherwise. Additionally, the argument at index ```'A'``` should be a null byte, and the ```char``` array at index ```'B'``` should be ```"\x20\x0a\x0d"```. To accomplish this, I will make use of the ```execve``` function in C.
 
-The ```execve``` function works by taking three arguments: The full path string, an array of ```char``` pointer, and an array of environment variables which is nullable. The function will stop execution of the calling process and replace it with the process being pointed to be the full path argument. More information can be found [Here](https://man7.org/linux/man-pages/man2/execve.2.html).
+The ```execve``` function works by taking three arguments: The full path string, an array of ```char``` pointer, and an array of environment variables which is nullable. The function will stop execution of the calling process and replace it with the process being pointed to by the full path argument. More information can be found [Here](https://man7.org/linux/man-pages/man2/execve.2.html).
 
 Here is the C program I created to pass in the necessary arguments:
 ```
@@ -103,7 +103,7 @@ Here is the C program I created to pass in the necessary arguments:
 int main(int argc, char** argv)
 {
 
-	char* args[100];
+	char* args[101];
 
 	for (int i =0; i < 100; i++)
 	{
@@ -122,7 +122,7 @@ int main(int argc, char** argv)
 ```
 Now let's go through the program line by line. To start, I initialized a ```char``` pointer array with 101 elements. Even though the arguments are zero indexed, the ```char``` pointer array passed to the ```execve``` function must be null terminated, so we need to add an additional element for the null terminator.
 
-Next, I use a ```for``` loop to fill the array with arbitrary values. The next line replaces the first element with the name of the binary to be executed by ```execve```. Then I replace indexes ```'A'``` and ```'B'``` with the necessary values, and finish with the null terminator at index 100.
+Next, I use a ```for``` loop to fill the array with arbitrary values. The next line replaces the first element with the name of the binary to be executed by ```execve```. Then I replace indicies ```'A'``` and ```'B'``` with the necessary values, and finish with the null terminator at index 100.
 
 Running this program, we can see that it worked.
 ```
