@@ -151,7 +151,7 @@ This code block is pretty straightforward. A ```char``` array containing 4 bytes
 To accomplish this, we can utilize pipes.
 
 ##### Pipe
-Pipes are a mechanism for interprocess communication. When you use the ```|``` symbol in a shell, you are creating a pipe from the preceding process to the following process. A pipe reads input from one end and writes output on the other. To create a pipe, we can utilize the ```pipe``` system call.More information on creating pipes in the C language can be found [here](https://tldp.org/LDP/lpg/node11.html).
+Pipes are a mechanism for interprocess communication. When you use the ```|``` symbol in a shell, you are creating a pipe from the preceding process to the following process. A pipe writes input on one end and reads output from the other. To create a pipe, we can utilize the ```pipe``` system call. More information on creating pipes in the C language can be found [here](https://tldp.org/LDP/lpg/node11.html).
 
 The ```pipe``` system call takes a single argument which is an array of two integers. The return value is an array of two integers which represent the input (read) and output (write) ends of the pipe. 
 
