@@ -5,7 +5,7 @@ permalink: /whoami/
 ---
 ### Education
 
-*Dakota State Univerisity*
+*Dakota State University*
 * B.S. in Cyber Operations and B.S. in Computer Science
 * GPA: 3.912/4.00
 * Expected Graduation: December 2024
