@@ -2,9 +2,8 @@
 layout: post
 title: Binary Exploitation - Pwnable_kr/Input2
 ---
-This challenge can be found on the pwnable_kr [website](http://pwnable.kr/play.php).
 
-## Pwnable_kr - Input Write-up
+## Pwnable_kr: Input - Write-up
 
 After using ```scp``` to copy the binary and c file locally, we can use ```cat``` to take a look at the c file.
 
