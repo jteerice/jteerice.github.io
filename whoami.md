@@ -20,5 +20,4 @@ permalink: /whoami/
 |Network Protocols |TCP/IP, UDP, DNS, ICMP, DHCP, HTTP, ARP, LDAP|
 
 <p align="center"> 
-<img src="https://tryhackme-badges.s3.amazonaws.com/omicronjob.png" alt="TryHackMe">
 </p>
