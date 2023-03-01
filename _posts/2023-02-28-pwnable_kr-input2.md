@@ -150,8 +150,16 @@ This code block is pretty straightforward. A ```char``` array containing 4 bytes
 
 To accomplish this, we can utilize pipes.
 
-##### Pipes
-Pipes are a mechanism for interprocess communication. When you use the ```|``` symbol in a shell, you are creating a pipe from the preceding process to the following process. More information on creating pipes in the C language can be found [here](https://tldp.org/LDP/lpg/node11.html).
+##### Pipe
+Pipes are a mechanism for interprocess communication. When you use the ```|``` symbol in a shell, you are creating a pipe from the preceding process to the following process. A pipe reads input from one end and writes output on the other. To create a pipe, we can utilize the ```pipe``` system call.More information on creating pipes in the C language can be found [here](https://tldp.org/LDP/lpg/node11.html).
+
+The ```pipe``` system call takes a single argument which is an array of two integers. The return value is an array of two integers which represent the input (read) and output (write) ends of the pipe. 
+
+By using the pipe, we can use the ```fork``` system call which creates a duplicate process of the calling process. If successful, the return value of ```fork``` is the ```pid``` (process id) of the child in the parent and ```0``` in the child. Otherwise, ```fork``` will return ```-1``` to indicate that the system call failed. We can use this to determine if the current process is the parent or the child.
+
+We need to know if the current process is either the parent or child so we know which file descriptor to close. According to [Creating Pipes in C](https://tldp.org/LDP/lpg/node11.html), if the current process is the child, we need to send data to the parent. In this case, we need to close ```fd[0]```. If the current process is the parent, we need to send data to the child. In this case, we would need to close ```fd[1]```. This is to ensure that the communicating processes don't get stuck in a loop with the same data being sent back and forth.
+
+
 
 
 
