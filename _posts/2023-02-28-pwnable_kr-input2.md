@@ -9,7 +9,7 @@ This is a fairly straightforward binary exploitation challenge on Pwnable_kr tha
 
 After using ```scp``` to copy the binary and c file locally, we can use ```cat``` to take a look at the c file.
 
-```
+```c
 └─$ cat input.c                
 #include <stdio.h>
 #include <stdlib.h>
@@ -85,7 +85,7 @@ So it looks like this challenge is broken up into 5 sepearate challenges. We can
 
 Let's take a look at the code block for the first challenge more closely.
 
-```
+```c
 // argv
 	if(argc != 100) return 0;
 	if(strcmp(argv['A'],"\x00")) return 0;
@@ -98,7 +98,7 @@ We can see that the program expects 100 arguments and will exit otherwise. Addit
 The ```execve``` function works by taking three arguments: The full path string, an array of ```char``` pointer, and an array of environment variables which is nullable. The function will stop execution of the calling process and replace it with the process being pointed to by the full path argument. More information can be found [Here](https://man7.org/linux/man-pages/man2/execve.2.html).
 
 Here is the C program I created to pass in the necessary arguments:
-```
+```c
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -137,7 +137,7 @@ Stage 1 clear!
 ### stdio
 
 Let's take a look at the code block for the next stage.
-```
+```c
 // stdio
 	char buf[4];
 	read(0, buf, 4);
@@ -160,7 +160,7 @@ By using the pipe, we can use the ```fork``` system call which creates a duplica
 We need to know if the current process is either the parent or child so we know which file descriptor to close. According to [Creating Pipes in C](https://tldp.org/LDP/lpg/node11.html), if the current process is the child, we need to send data to the parent. In this case, we need to close ```fd[0]```. If the current process is the parent, we need to send data to the child. In this case, we would need to close ```fd[1]```. This is to ensure that the communicating processes don't get stuck in a loop with the same data being sent back and forth.
 
 Here is my solution for stage 2:
-```
+```c
         int stdinStream[2];
 	int stderrStream[2];	
 	pid_t childPid;	
@@ -210,6 +210,39 @@ Stage 2 clear!
 zsh: segmentation fault  ./test
 ```
 ### env
+
+Once again, let's take a look at the code block for the next challenge.
+```c
+// env
+        if(strcmp("\xca\xfe\xba\xbe", getenv("\xde\xad\xbe\xef"))) return 0;
+        printf("Stage 3 clear!\n");
+```
+
+This is pretty straightforward as well. This code block checks that the value of the envirnoment variable ```0xdeadbeef``` is ```0xcafebabe```. If it does the values don't match, the program exits.
+
+To do this, all we need to do is setup the environment variable when we call ```execve```. The ```execve``` function requires that the environment variable argument be a ```char``` pointer array, and that array must be null terminated. The string values of the array elements must be in the format of ```key=value```.
+
+Here is my simple code solution for stage 3.
+```c
+char* envp[2];
+
+        envp[0] = "\xde\xad\xbe\xef=\xca\xfe\xba\xbe";
+        envp[1] = "\0"; 
+```
+I initialed a character pointer array with 2 elements. This is to allow space for the environment variable I need to set, and the null terminating string. Next, I initialize the environent variable string at index ```0``` and initialize the null terminator at index ```1```.
+
+When we run the code, we can see that it works as intended.
+```
+└─$ ./test         
+Welcome to pwnable.kr
+Let's see if you know how to give input to program
+Just give me correct inputs then you will get the flag :)
+Stage 1 clear!
+Stage 2 clear!
+Stage 3 clear!
+```
+### file
+
 
 
 
