@@ -218,7 +218,7 @@ Once again, let's take a look at the code block for the next challenge.
         printf("Stage 3 clear!\n");
 ```
 
-This is pretty straightforward as well. This code block checks that the value of the envirnoment variable ```0xdeadbeef``` is ```0xcafebabe```. If it does the values don't match, the program exits.
+This is pretty straightforward as well. This code block checks that the value of the envirnoment variable ```0xdeadbeef``` is ```0xcafebabe```. If the values don't match, the program exits.
 
 To do this, all we need to do is setup the environment variable when we call ```execve```. The ```execve``` function requires that the environment variable argument be a ```char``` pointer array, and that array must be null terminated. The string values of the array elements must be in the format of ```key=value```.
 
