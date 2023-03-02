@@ -9,8 +9,7 @@ This is a fairly straightforward binary exploitation challenge on Pwnable_kr tha
 
 After using ```scp``` to copy the binary and c file locally, we can use ```cat``` to take a look at the c file.
 
-```c
-└─$ cat input.c                
+```c              
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -138,7 +137,7 @@ Stage 1 clear!
 
 Let's take a look at the code block for the next stage.
 ```c
-// stdio
+        // stdio
 	char buf[4];
 	read(0, buf, 4);
 	if(memcmp(buf, "\x00\x0a\x00\xff", 4)) return 0;
@@ -213,7 +212,7 @@ zsh: segmentation fault  ./test
 
 Once again, let's take a look at the code block for the next challenge.
 ```c
-// env
+        // env
         if(strcmp("\xca\xfe\xba\xbe", getenv("\xde\xad\xbe\xef"))) return 0;
         printf("Stage 3 clear!\n");
 ```
@@ -229,7 +228,7 @@ char* envp[2];
         envp[0] = "\xde\xad\xbe\xef=\xca\xfe\xba\xbe";
         envp[1] = "\0"; 
 ```
-I initialed a character pointer array with 2 elements. This is to allow space for the environment variable I need to set, and the null terminating string. Next, I initialize the environent variable string at index ```0``` and initialize the null terminator at index ```1```.
+I initialized a character pointer array with 2 elements. This is to allow space for the environment variable I need to set, and the null terminating string. Next, I initialize the environent variable string at index ```0``` and initialize the null terminator at index ```1```.
 
 When we run the code, we can see that it works as intended.
 ```
@@ -242,6 +241,45 @@ Stage 2 clear!
 Stage 3 clear!
 ```
 ### file
+
+Let's inspect the next code block.
+```
+        // file
+        FILE* fp = fopen("\x0a", "r");
+        if(!fp) return 0;
+        if( fread(buf, 4, 1, fp)!=1 ) return 0;
+        if( memcmp(buf, "\x00\x00\x00\x00", 4) ) return 0;
+        fclose(fp);
+        printf("Stage 4 clear!\n");     
+```
+Another fairly simple challenge. The first line calls ```fopen``` which opens a file in read mode and saves returns a file pointer. The next line ensures that ```fopen``` returned successfully. Next, ```fread``` is called to read in one 4 byte item from the file pointer that was created with ```fopen```. Finally, ```memcmp``` checks to make sure that the value read in by ```fread``` is ```\x00\x00\x00\x00```, and upon success, closes the file pointer.
+
+It is important to note that if the file that ```fopen``` is called on does not exist, it will create that file. Knowing this, we can call ```fopen``` on the file ```\x0a``` which will create the file for us. 
+
+Here is the my solution for stage 4.
+```c
+	char* fileChallenge = "\x00\x00\x00\x00";
+        FILE *fp = fopen("\x0a", "w");
+        fwrite(fileChallenge, 4, 1, fp);
+        fclose(fp);
+```
+
+The first line initializes a string to the required data. Then, we open the file ```\x0a``` in write mode and write the string we initialized earlier to the file. Finally, we close the file.
+
+Another stage complete.
+```
+└─$ ./test
+Welcome to pwnable.kr
+Let's see if you know how to give input to program
+Just give me correct inputs then you will get the flag :)
+Stage 1 clear!
+Stage 2 clear!
+Stage 3 clear!
+Stage 4 clear!
+```
+
+### network
+
 
 
 
