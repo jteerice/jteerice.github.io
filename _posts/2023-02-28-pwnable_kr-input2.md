@@ -264,7 +264,7 @@ Here is the my solution for stage 4.
         fclose(fp);
 ```
 
-The first line initializes a string to the required data. Then, we open the file ```\x0a``` in write mode and write the string we initialized earlier to the file. Finally, we close the file.
+The first line initializes a string to the required data. Then we open the file ```\x0a``` in write mode and write the string we initialized earlier to the file. Finally, we close the file.
 
 Another stage complete.
 ```
@@ -280,7 +280,37 @@ Stage 4 clear!
 
 ### network
 
+Let's take a look at the final stage.
+```c
+// network
+        int sd, cd;
+        struct sockaddr_in saddr, caddr;
+        sd = socket(AF_INET, SOCK_STREAM, 0);
+        if(sd == -1){
+                printf("socket error, tell admin\n");
+                return 0;
+        }
+        saddr.sin_family = AF_INET;
+        saddr.sin_addr.s_addr = INADDR_ANY;
+        saddr.sin_port = htons( atoi(argv['C']) );
+        if(bind(sd, (struct sockaddr*)&saddr, sizeof(saddr)) < 0){
+                printf("bind error, use another port\n");
+                return 1;
+        }
+        listen(sd, 1);
+        int c = sizeof(struct sockaddr_in);
+        cd = accept(sd, (struct sockaddr *)&caddr, (socklen_t*)&c);
+        if(cd < 0){
+                printf("accept error, tell admin\n");
+                return 0;
+        }
+        if( recv(cd, buf, 4, 0) != 4 ) return 0;
+        if(memcmp(buf, "\xde\xad\xbe\xef", 4)) return 0;
+        printf("Stage 5 clear!\n");
+```
+This is a much bigger code block than we have seen previously. We will need to dissect it line by line to get an idea of what's going on.
 
+The code block starts by initializing two integer variables ```sd``` and ```cd```. The next line calls the ```socket``` function and saves the return value in ```sd```.
 
 
 
