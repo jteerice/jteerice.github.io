@@ -311,7 +311,12 @@ Let's take a look at the final stage.
 This is a much bigger code block than we have seen previously. We will need to dissect it line by line to get an idea of what's going on, but before we do, let's go over a brief overview of sockets and how they function.
 
 
-The code block starts by initializing two ```int``` variables followed by two ```sockaddr_in``` variables. The ```sockaddr_in``` variables are basically used to hold addressing information for IPv4 sockets. The next line calls the ```socket``` function and saves the return value in ```sd```. We know from the arguments passed to the ```socket``` function that the socket is an IPv4 socket running TCP. Then the value of sd is checked to ensure that the ```socket``` function returned successfully. The following three lines are used to save addressing information for the ```saddr``` variable. 
+The code block starts by initializing two ```int``` variables followed by two ```sockaddr_in``` variables. The ```sockaddr_in``` variables are basically used to hold addressing information for IPv4 sockets. The next line calls the ```socket``` function and saves the return value in ```sd```. We know from the arguments passed to the ```socket``` function that the socket is an IPv4 socket running TCP. Then the value of sd is checked to ensure that the ```socket``` function returned successfully. The following two lines are used to save addressing information for the ```saddr``` variable. The next line is a special though.
+
+```c
+saddr.sin_port = htons( atoi(argv['C']) );
+```
+This line uses the value at of ```argv['C']``` as the port address for the socket. This allows us to choose the address of the listening port.
 
 The following ```if``` statement calls the ```bind``` function. The ```bind``` function takes three arguments: A socket file descriptor, a socket address, and the size of the address ```struct``` being assigned. The function simply assigns the socket address to the file descriptor, and, according to the man page for ```bind```, is traditionally referred to as "assigning a name to a socket". Now that the socket has a full address i.e. an IP and port address, it can be used to send and recieve data.
 
@@ -321,7 +326,7 @@ We are almost done, I swear! The program calls ```recv``` to recieve data from t
 
 Finally, ```memcmp``` is called one last time to check that the value of ```buf``` matches the indicated string. On success, the stage is complete.
 
-So, now that we understand what's going on, we can figure out how to pass the check. All we need to do is connect to the ```sd``` socket and send the string ```\xde\xad\xbe\xef```. To accomplish this, we need to create our own socket, bind it, and use the ```connect``` system call. The ```connect``` system call takes three arguments: A file descrptor for the socket we want to connect with, an address for the socket we want to connect to, and a value indicating the length of the address.
+So, now that we understand what's going on, we can figure out how to pass the check. All we need to do is change the value of ```argv['C']``` to the port number we want to assign ```sd```, connect to the ```sd``` socket, and send the string ```\xde\xad\xbe\xef```. To accomplish this, we need to create our own socket, bind it, and use the ```connect``` system call. The ```connect``` system call takes three arguments: A file descrptor for the socket we want to connect with, an address for the socket we want to connect to, and a value indicating the length of the address.
 
 
 
