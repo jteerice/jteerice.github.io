@@ -308,11 +308,20 @@ Let's take a look at the final stage.
         if(memcmp(buf, "\xde\xad\xbe\xef", 4)) return 0;
         printf("Stage 5 clear!\n");
 ```
-This is a much bigger code block than we have seen previously. We will need to dissect it line by line to get an idea of what's going on.
-
-The code block starts by initializing two integer variables ```sd``` and ```cd```. The next line calls the ```socket``` function and saves the return value in ```sd```.
+This is a much bigger code block than we have seen previously. We will need to dissect it line by line to get an idea of what's going on, but before we do, let's go over a brief overview of sockets and how they function.
 
 
+The code block starts by initializing two ```int``` variables followed by two ```sockaddr_in``` variables. The ```sockaddr_in``` variables are basically used to hold addressing information for IPv4 sockets. The next line calls the ```socket``` function and saves the return value in ```sd```. We know from the arguments passed to the ```socket``` function that the socket is an IPv4 socket running TCP. Then the value of sd is checked to ensure that the ```socket``` function returned successfully. The following three lines are used to save addressing information for the ```saddr``` variable. 
+
+The following ```if``` statement calls the ```bind``` function. The ```bind``` function takes three arguments: A socket file descriptor, a socket address, and the size of the address ```struct``` being assigned. The function simply assigns the socket address to the file descriptor, and, according to the man page for ```bind```, is traditionally referred to as "assigning a name to a socket". Now that the socket has a full address i.e. an IP and port address, it can be used to send and recieve data.
+
+The next line calls the ```listen``` function to setup the ```sd``` socket as a passive socket to recieve data. Now the program calls ```accept``` to accept the first connection made to ```sd```. On return, ```cd``` will contain the file descriptor for the accepted socket. The next ```if``` statement checks to ensure the ```accept``` function returned successfully.
+
+We are almost done, I swear! The program calls ```recv``` to recieve data from the socket passed as the first argument. As an interesting note, ```recv``` is almost identical to ```read``` with the exception of the fourth argument ```flags```. If the ```flags``` argument is ```0```, as in the case of the program, it is essentially the same as ```read```. In our case, ```recv``` reads the indicated number of bytes from the file descriptor and saves them into the ```buf``` array. If the return value of ```recv``` is not ```4```, the program exits.
+
+Finally, ```memcmp``` is called one last time to check that the value of ```buf``` matches the indicated string. On success, the stage is complete.
+
+So, now that we understand what's going on, we can figure out how to pass the check. All we need to do is connect to the ```sd``` socket and send the string ```\xde\xad\xbe\xef```. To accomplish this, we need to create our own socket, bind it, and use the ```connect``` system call. The ```connect``` system call takes three arguments: A file descrptor for the socket we want to connect with, an address for the socket we want to connect to, and a value indicating the length of the address.
 
 
 
