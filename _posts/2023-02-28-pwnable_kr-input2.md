@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Binary Exploitation - Pwnable_kr/Input2
+title: Binary Exploitation&#58; Pwnable_kr/Input2
 ---
 
 ## Pwnable_kr: Input - Write-up
