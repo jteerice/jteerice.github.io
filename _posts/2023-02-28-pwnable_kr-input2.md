@@ -5,7 +5,7 @@ title: Binary Exploitation&#58; Pwnable_kr/Input2
 
 ## Pwnable_kr: Input - Write-up
 
-This is a fairly straightforward binary exploitation challenge on Pwnable_kr that centers around passing input to a program. First we can try and exploit the program locally, then write an exploit that we can use to retrieve the flag remotely.
+This is a fairly straightforward binary exploitation challenge on Pwnable_kr that centers around passing input to a program. At first glance, it seems rather simple, but after working throught the challenge I learned quite a lot about sockets and pipes in C programming.
 
 After using ```scp``` to copy the binary and c file locally, we can use ```cat``` to take a look at the c file.
 
