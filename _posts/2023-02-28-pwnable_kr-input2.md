@@ -328,6 +328,140 @@ Finally, ```memcmp``` is called one last time to check that the value of ```buf`
 
 So, now that we understand what's going on, we can figure out how to pass the check. All we need to do is change the value of ```argv['C']``` to the port number we want to assign ```sd```, connect to the ```sd``` socket, and send the string ```\xde\xad\xbe\xef```. To accomplish this, we need to create our own socket, bind it, and use the ```connect``` system call. The ```connect``` system call takes three arguments: A file descrptor for the socket we want to connect with, an address for the socket we want to connect to, and a value indicating the length of the address.
 
+Here is my solution to stage 5.
+```c
+sleep(3);       
+                int sock;
+                struct sockaddr_in sockAddress;
+
+                sockAddress.sin_family = AF_INET;
+                sockAddress.sin_addr.s_addr = inet_addr("127.0.0.1");
+                sockAddress.sin_port = htons(7777);
+
+                sock = socket(AF_INET, SOCK_STREAM, 0);
+                if (connect(sock, (struct sockaddr*)&sockAddress, sizeof(sockAddress)) < 0)
+                {
+                        printf("connection failed!\n");
+                        exit(1);
+                }
+                printf("connected!\n");
+                char* buffer = "\xde\xad\xbe\xef";      
+                send(sock, buffer, 4, 0);
+                close(sock);
+```
+To start, we initialize an ```int``` variable and a ```sockaddr_in``` variable to serve as the address of the socket we want to connect to. Then we initialize the ```struct``` variables. The ```inet_addr``` function converts the numbers-and-dots address we pass as the argument to its binary representation in network byte order.
+
+We create a socket that we want to connect with and save the file descriptor into the ```sock``` variable. Next, we call ```connect``` to connect our socket to the socket created in the challenge and check the return value to ensure it connected properly. Finally, we call ```send``` to transmit the necessary data from our socket to the recieving socket. Et Viola!
+
+```
+└─$ ./test
+Welcome to pwnable.kr
+Let's see if you know how to give input to program
+Just give me correct inputs then you will get the flag :)
+Stage 1 clear!
+Stage 2 clear!
+Stage 3 clear!
+Stage 4 clear!
+connected!
+Stage 5 clear!
+
+```
+### The Whole C File
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
+int main(int argc, char** argv)
+{
+	// stage 1 and 2
+	char* args[101];
+	char* envp[2];
+
+	envp[0] = "\xde\xad\xbe\xef=\xca\xfe\xba\xbe";
+	envp[1] = "\0";	
+
+	for (int i =0; i < 100; i++)
+	{
+		args[i] = "A";
+	}
+
+	args[0] = "input";
+	args['A'] = "\x00";
+	args['B'] = "\x20\x0a\x0d";
+	args[100] = '\0';
+	args['C'] = "7777";
+	
+	// stage 3
+	char* fileChallenge = "\x00\x00\x00\x00";
+	FILE *fp = fopen("\x0a", "w");
+	fwrite(fileChallenge, 4, 1, fp);
+	fclose(fp);
+
+
+	// stage 2
+	int stdinStream[2];
+	int stderrStream[2];	
+	pid_t childPid;	
+
+	if (pipe(stdinStream) < 0 || pipe(stderrStream) < 0)
+	{
+		printf("pipes failed!\n");
+		exit(1);
+	}	
+	if ((childPid = fork()) < 0)
+	{
+		printf("fork failed!\n");
+		exit(1);
+	}
+	if (childPid == 0)
+	{
+		close(stdinStream[0]);	
+		close(stderrStream[0]);	
+	
+		write(stdinStream[1], "\x00\x0a\x00\xff", 4);	
+		write(stderrStream[1], "\x00\x0a\x02\xff", 4);
+	}
+	else 
+	{
+		close(stdinStream[1]);
+		close(stderrStream[1]);
+
+		dup2(stdinStream[0], 0);
+		dup2(stderrStream[0], 2);
+
+		close(stdinStream[0]);
+		close(stderrStream[0]);	
+		execve("/home/jake/Desktop/pwnable_kr/input/breakme", args, envp);
+	}
+		
+		// stage 5	
+		sleep(3);	
+		int sock;
+		struct sockaddr_in sockAddress;
+
+		sockAddress.sin_family = AF_INET;
+		sockAddress.sin_addr.s_addr = inet_addr("127.0.0.1");
+		sockAddress.sin_port = htons(7777);
+
+		sock = socket(AF_INET, SOCK_STREAM, 0);
+		if (connect(sock, (struct sockaddr*)&sockAddress, sizeof(sockAddress)) < 0)
+		{
+			printf("connection failed!\n");
+			exit(1);
+		}
+		printf("connected!\n");
+		char* buffer = "\xde\xad\xbe\xef"; 	
+		send(sock, buffer, 4, 0);
+		close(sock);
+
+	return 0;
+}
+```
+
 
 
 
