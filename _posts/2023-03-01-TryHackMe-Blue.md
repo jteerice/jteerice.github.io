@@ -5,6 +5,8 @@ title: Pentesting&#58; TryHackMe/Blue
 
 ## TryHackMe: Blue - Write-up
 
+This is a very simple box that focuses on the EternalBlue exploit which targets vulnerable versions of SMB.
+
 ### Enumeration
 
 ##### Nmap
