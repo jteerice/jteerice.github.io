@@ -378,6 +378,7 @@ ssh -i id_rsa kenobi@10.10.213.160
 SUID (Set User ID), SGID (Set Group ID), and sticky bits are permission identifiers with special meaning.
 
 * SUID
+* * On files:
 
 
 
