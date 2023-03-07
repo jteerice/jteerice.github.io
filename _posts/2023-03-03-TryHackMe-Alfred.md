@@ -10,6 +10,8 @@ This was a super fun box that leveraged a misconfiguration with SMB and a vulner
 ### Enumeration
 
 ##### nmap
+
+```
 # Nmap 7.92 scan initiated Fri Sep 30 20:16:49 2022 as: nmap -sC -sV -oN initial.txt 10.10.204.190
 Nmap scan report for 10.10.204.190
 Host is up (0.16s latency).
