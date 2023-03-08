@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Pentesting&#58; TryHackMe/Alfred
+title: Pentesting&#58; TryHackMe/Kenobi
 ---
 
-## TryHackMe: Alfred Write-up
+## TryHackMe: Kenobi Write-up
 
 This was a super fun box that leveraged a misconfiguration with SMB and a vulnerable version of ProFtpd.
 
