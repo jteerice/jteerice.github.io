@@ -103,7 +103,7 @@ We are then prompted for a password and ten bytes from stdin are read into anoth
 Now we get to the encryption function.
 ```c
 	// xor your input
-        xor(pw_buf2, 10);### xor()
+        xor(pw_buf2, 10);
 ```
 
 ### xor()
