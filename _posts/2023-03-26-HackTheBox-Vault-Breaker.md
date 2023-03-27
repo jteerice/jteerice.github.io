@@ -173,13 +173,14 @@ The flag is XORed with our key. Using the information we gathered previously abo
 
 To complete this challenge, we need a script that will connect to the target and input a key length 32 times from 0 to 31 (The key length is 32 bytes).
 ```python
-!/usr/bin/env  python3
+#!/usr/bin/env  python3
 
 from pwn import *
 
+flag = ""
 
-for i in range(32):
-    p = remote("167.172.52.160", 32550) 
+for i in range(23):
+    p = remote("209.97.134.177", 31320) 
     p.recvuntil(b"> ", timeout=30)
     p.sendline(b"1")
     p.recvuntil(b"Length of new password (0-31): ", timeout=30)
@@ -189,9 +190,12 @@ for i in range(32):
 
     # Capture response
     p.recvuntil(b"Vault: ", timeout=30)
-    print(chr(p.recvline()[i]))
+    r = p.recvline()
 
+    # Append unencrypted character to flag
+    flag += chr(r[i])
     p.close()
+    print(flag)
 ```
 
 Et Voila!
