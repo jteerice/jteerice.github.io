@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Binary Exploitatiog&#58; HacktheBox/Vault-Breaker Write-up
+title: Binary Exploitation&#58; HacktheBox/Vault-Breaker Write-up
 ---
 
 ## HacktheBox Vault-Breaker Write-up
