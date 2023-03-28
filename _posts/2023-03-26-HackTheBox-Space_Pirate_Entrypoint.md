@@ -78,7 +78,7 @@ The first thing I notice is a format string vulnerability on this line:
 printf(local_38);
 ```
 
-Format string vulnerabilities happen when the proper arguments are not passed to a string processing function such as ```printf```. Normally, the first argument would be the *format string*, such as ```"Hello, my name is %s!\n", the following arguments passed to the function must correspond with the format specifiers in the format string, or else ```printf``` will use the data at where the argument *should* have been. A more thorough breakdown of format strings can be found [here](https://axcheron.github.io/exploit-101-format-strings/).
+Format string vulnerabilities happen when the proper arguments are not passed to a string processing function such as ```printf```. Normally, the first argument would be the *format string*, such as ```"Hello, my name is %s!\n"```, the following arguments passed to the function must correspond with the format specifiers in the format string, or else ```printf``` will use the data at where the argument *should* have been. A more thorough breakdown of format strings can be found [here](https://axcheron.github.io/exploit-101-format-strings/).
 
 How does this help us write to memeory? By using the ```%n``` specifier. This specifier will write the number of bytes expressed as an integer to the corresponding argument. For instance:
 ```
