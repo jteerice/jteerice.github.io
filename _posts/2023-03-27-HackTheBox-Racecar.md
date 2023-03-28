@@ -48,6 +48,9 @@ To start, we need to find out what the offset of the flag is from the output of 
 ```
 python -c 'print b"\xef\xbe\xad\xde"' > flag.txt
 ```
+
+Now just run the program again like we did before.
+```
 [!] Do you have anything to say to the press after your big victory?
 > %p %p %p %p %p %p %p %p %p %p %p %p %p %p %p %p %p %p %p %p 
 
