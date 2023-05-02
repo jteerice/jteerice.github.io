@@ -241,7 +241,6 @@ c:\flag1.txt                          24            2019-03-17 12:27:21 -0700
 The System Account Manager config file contains the hashed values of passwords for users on the system. When a user inputs a password, it is checked against the hash in this file for authentication.
 
 ```
-```
 └─$ msfconsole                                                             
                                                   
      ,           ,
