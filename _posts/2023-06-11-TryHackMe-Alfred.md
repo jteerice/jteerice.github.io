@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Pentesting&58; TryHackMe/Alfred
+title: Pentesting&#58; TryHackMe/Alfred
 ---
 
 ## TryHackMe: Alfred Write-up
