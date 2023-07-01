@@ -5,7 +5,8 @@ title: Reverse Engineering&#58; HackTheBox/Exalton
 
 ## HackTheBox - Exalton - Write-up
 
-After downloading the binary, we see that it is a 64-bit executable, statically linked, and not stripped.```
+After downloading the binary, we see that it is a 64-bit executable, statically linked, and not stripped.
+```
 exatlon_v1: ELF 64-bit LSB executable, x86-64, version 1 (GNU/Linux), statically linked, BuildID[sha1]=99364060f1420e00a780745abcfa419af0b8b0d8, for GNU/Linux 3.2.0, not stripped
 ```
 
