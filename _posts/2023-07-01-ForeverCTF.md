@@ -38,6 +38,7 @@ r.recvuntil(b'What will you do next? ')
 r.sendline(b'2')
 
 r.interactive()
+```
 
 ### Tricky Indices
 
