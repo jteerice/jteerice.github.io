@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ForeverCTF Challenge Write-ups
+title: ForeverCTF Write-ups
 ---
 
 ## Pwn
@@ -349,7 +349,7 @@ Gameplan is to leak the canary value using the length input and construct a seco
 
 The canary is stored on the stack at ```rbp-0x8``` and our input is at ```rbp-0x70```. So our offset is ```0x70 - 0x8 = 104```. Now, for reasons I still don't quite understand, this offset was actually 120. It took a lot of fiddling with the script to get it to return the canary value.
 
-Now we need to find the offset of the return address. If we bust our ```pwndbg`` and use the ```cyclic`` and ```cyclic -l``` combo after setting a breakpoint at the return instruction, we see that the offset is 120. Now we have all the information we need.
+Now we need to find the offset of the return address. If we bust our ```pwndbg``` and use the ```cyclic``` and ```cyclic -l``` combo after setting a breakpoint at the return instruction, we see that the offset is 120. Now we have all the information we need.
 ```python
 #!/usr/bin/env python3
 
